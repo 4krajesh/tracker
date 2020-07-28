@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+  
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import Container from 'react-bootstrap/Container';
+import ListGroup from 'react-bootstrap/ListGroup';
+
+
+import {
+  Route,
+  NavLink,
+  BrowserRouter
+} from "react-router-dom";
+
+import Accounts from "./views/accounts";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+             <div>
+	    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
+  <Navbar.Brand href="/">Tracker</Navbar.Brand>
+  <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+  <Navbar.Collapse id="responsive-navbar-nav">
+    <Nav className="mr-auto">
+      <Nav.Link href="/accounts">Accounts</Nav.Link>
+      <Nav.Link href="#pricing">Transactions</Nav.Link>
+    </Nav>
+  </Navbar.Collapse>
+</Navbar>
+                          <BrowserRouter>
+	    <Route exact path="/" component={Accounts}/>
+	    <Route exact path="/accounts" component={Accounts}/>
+                          </BrowserRouter>
+            </div>
+    );
 }
+
 
 export default App;
