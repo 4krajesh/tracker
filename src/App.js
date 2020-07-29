@@ -18,6 +18,7 @@ import {
 } from "react-router-dom";
 
 import Accounts from "./views/accounts";
+import Transactions from "./views/transactions";
 
 function App() {
     return (
@@ -28,13 +29,14 @@ function App() {
   <Navbar.Collapse id="responsive-navbar-nav">
     <Nav className="mr-auto">
       <Nav.Link href="/accounts">Accounts</Nav.Link>
-      <Nav.Link href="#pricing">Transactions</Nav.Link>
+      <Nav.Link href="/transactions">Transactions</Nav.Link>
     </Nav>
   </Navbar.Collapse>
 </Navbar>
                           <BrowserRouter>
 	    <Route exact path="/" component={Accounts}/>
 	    <Route exact path="/accounts" component={Accounts}/>
+	    <Route exact path="/transactions" component={Transactions}/>
                           </BrowserRouter>
             </div>
     );
