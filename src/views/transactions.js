@@ -6,8 +6,8 @@ class Transactions extends Component {
     super(props);
 		this.state = {transactions: [{id:'111',created_at:'20-01-1995',value:'1234'},{id:'222',created_at:'20-01-1995',value:'4293'},{id:'333',created_at:'21-01-1995',value:'84723'},{id:'444',created_at:'21-01-1995',value:'78942'}]};
   }
-	componentDidMount() {
-/*    const apiUrl = 'https://api.github.com/users/hacktivist123/repos';
+/*	componentDidMount() {
+    const apiUrl = 'https://api.github.com/users/hacktivist123/repos';
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => this.setState({transactions1: data}));
