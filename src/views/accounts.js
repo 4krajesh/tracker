@@ -14,14 +14,10 @@ function Example() {
 
   return (
     <>
-	  <Card border="dark" style={{ width: '18rem', margin: '10px' }} onClick={handleShow}>
-    <Card.Body>
-      <Card.Text>Add Account</Card.Text>
-    </Card.Body>
-  </Card>
+	  <Button variant="outline-dark" onClick={handleShow} style={{ width: '300px', margin: '10px'}} >Add Account</Button>
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>New Account Details</Modal.Title>
         </Modal.Header>
         <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
         <Modal.Footer>
@@ -41,16 +37,18 @@ function Example() {
 class Accounts extends Component {
 	constructor(props) {
     super(props);
-		this.state = {accounts: [{ name: "Kotak" }, { name: "Citi" }]};
+		this.state = {accounts: [{ name: "Account2", type: "Credit", balance: "10000", limit: "15000"}, { name: "Account1", type: "Debit", balance: "300000"}]};
   }
 	render() {
 		const listItems = this.state.accounts.map((account, index) =>
 			<Col xs={{span: 0, offset: 0}} md={{ span: 4, offset: 1 }} lg={{ span: 0, offset: 0 }} key={index}>
-  			  <Card border="dark" style={{ width: '18rem', margin: '10px'}}>
+  			  <Card className="text-center" text="light" bg="dark" style={{ width: '300px', height: '200px', margin: '10px'}}>
+			 <Card.Header>{account.name}</Card.Header>
     <Card.Body>
-      <Card.Title>{account.name}</Card.Title>
       <Card.Text>
-			In Progress.
+			<p>Type: {account.type}</p>
+			<p>Balance: {account.balance}</p>
+			<p>{account.limit ? 'Limit:' : ''} {account.limit}</p>
       </Card.Text>
     </Card.Body>
   </Card>
@@ -60,7 +58,7 @@ class Accounts extends Component {
 
 		return (
                 <div>
-                        <h1>Tracker Accounts</h1>
+                        <h1 className="text-center" style={{padding: '20px'}}>Accounts</h1>
 			<Container>
 			<Row xs={1} md={4}>
 			{listItems}
