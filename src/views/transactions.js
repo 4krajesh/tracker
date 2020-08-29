@@ -29,7 +29,7 @@ class Transactions extends Component {
 		return (
                 <div>
                         <h1 className="text-center" style={{padding: '20px'}}>Transactions</h1>
-			<Table striped bordered hover variant="dark">
+			<Table striped bordered hover variant="dark" size="sm">
   <thead>
     <tr>
       <th>#</th>

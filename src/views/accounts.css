@@ -1,0 +1,23 @@
+.account-card {
+	text-align: center;
+	width: 200px;
+	height: 130px;
+}
+.card-hover:hover {
+	background: #333;
+	color: #fff;
+	border-radius: 0 0 .25rem .25rem
+}
+
+.account-group > .row {
+	overflow-x: auto;
+	white-space: nowrap;
+	display: block
+}
+
+.account-group > .row > .col {
+	display: inline-block;
+	float: none;
+	max-width: 250px;
+	margin: 10px
+}
