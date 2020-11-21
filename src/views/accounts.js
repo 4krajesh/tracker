@@ -29,15 +29,33 @@ function NewAccount() {
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+    } else {
+	    const requestOptions = {
+      		method: 'POST',
+	        headers: { 'Content-Type': 'application/json' },
+        	body: JSON.stringify({name: document.getElementById('formAccountName').value,
+		balance: document.getElementById('formCurrentBalance').value,
+		type: document.getElementById('formAccountType').value
+		})
+	    };
+	fetch('http://192.168.0.104:3001/createaccount', requestOptions)
+        .then(response => response.json())
+        .then(function(data){
+		if(data.status === 'success'){
+			alert('Account added successfully.');
+		} else
+		{
+			alert("Something went wrong.")
+		}
+	});
     }
-
     setValidated(true);
   };
   
 
   return (
     <>
-      <Card className="account-card card-hover" onClick={handleShow}>
+      <Card className="account-card card-hover-1" onClick={handleShow}>
         <Card.Body>
           <Card.Title>
             <BsFillPlusCircleFill />
@@ -57,7 +75,7 @@ function NewAccount() {
             </Form.Group>
             <Form.Group controlId="formCurrentBalance">
               <Form.Label>Current balance</Form.Label>
-              <Form.Control type="number" placeholder="Current balance" required/>
+              <Form.Control type="number" placeholder="Current balance" maxLength="3" required/>
             </Form.Group>
             <Form.Group controlId="formAccountType">
               <Form.Label>Type</Form.Label>
@@ -88,7 +106,7 @@ function NewAccount() {
 class Accounts extends Component {
   constructor(props) {
     super(props);
-    this.state = { accounts: [], current: {} };
+    this.state = { accounts: [], current: {} , transactions: []};
   }
 
   setDefaultVal(value, defaultValue) {
@@ -102,6 +120,7 @@ class Accounts extends Component {
         (result) => {
           this.setState({
             accounts: result.accounts,
+	    transactions: result.transactions,
           });
           const current = this.setDefaultVal(
             this.props.match.params.accountId,
@@ -142,6 +161,14 @@ class Accounts extends Component {
       </Col>
     ));
 
+	  const transactionItems = this.state.transactions.map((transaction, index) => (
+	  <tr key={index}>
+                    <td>{transaction.id}</td>
+                    <td>{transaction.date}</td>
+                    <td>{transaction.value}</td>
+                  </tr>
+	));
+
     return (
       <div>
         <h1 className="text-center" style={{ padding: "20px" }}>
@@ -169,24 +196,13 @@ class Accounts extends Component {
               <Table striped bordered hover>
                 <thead>
                   <tr>
-                    <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Username</th>
+                    <th>#ID</th>
+                    <th>Date</th>
+                    <th>Value</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td colSpan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
+	    {transactionItems}
                 </tbody>
               </Table>
             </Col>

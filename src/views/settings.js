@@ -1,19 +1,5 @@
 import React, { Component } from 'react';
 
-import {
-	Card,
-	Modal,
-	Button,
-	Row,
-	Col,
-	Container,
-} from 'react-bootstrap';
-
-import {
-  Route,
-  BrowserRouter
-} from "react-router-dom";
-
 class Settings extends Component {
 	render() {
 
