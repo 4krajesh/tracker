@@ -44,6 +44,13 @@ constructor(props) {
         </header>
         <div class="account-tags">
           <a href={`/accounts/${account.id}`}>view</a>
+		      {account.default ? (
+		      " " ) : (
+			      <>
+          <a href={`/accounts/${account.id}`}>edit</a>
+          <a href={`/accounts/${account.id}`}>delete</a>
+			      </>
+		      )}
         </div>
       </article>
     ));
