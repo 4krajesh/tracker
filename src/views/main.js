@@ -6,6 +6,7 @@ import { BsGearFill } from "react-icons/bs";
 
 import Accounts from "./accounts";
 import Settings from "./settings";
+import Cards from "./cards";
 
 import { Nav, Navbar, OverlayTrigger, Tooltip } from "react-bootstrap";
 
@@ -47,6 +48,7 @@ class Main extends Component {
         <BrowserRouter>
           <Route exact path="/" component={Accounts} />
           <Route exact path="/accounts" component={Accounts} />
+          <Route exact path="/cards" component={Cards} />
           <Route exact path="/settings" component={Settings} />
           <Route exact path="/accounts/:accountId" component={Accounts} />
         </BrowserRouter>

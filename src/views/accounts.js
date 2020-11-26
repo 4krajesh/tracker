@@ -10,9 +10,9 @@ import {
   Table,
   Form,
 } from "react-bootstrap";
-import { BsFillPlusCircleFill } from "react-icons/bs";
 
-import "./accounts.css";
+//import "./accounts.css";
+import Cards from "./cards";
 
 function NewAccount() {
   const [show, setShow] = React.useState(false);
@@ -55,14 +55,7 @@ function NewAccount() {
 
   return (
     <>
-      <Card className="account-card card-hover-1" onClick={handleShow}>
-        <Card.Body>
-          <Card.Title>
-            <BsFillPlusCircleFill />
-          </Card.Title>
-          <Card.Title>Add Account</Card.Title>
-        </Card.Body>
-      </Card>
+      <Button variant="outline-secondary" onClick={handleShow}>Add Account</Button>
       <Modal show={show} onHide={handleClose} animation={true}>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Modal.Header closeButton>
@@ -104,7 +97,7 @@ function NewAccount() {
 }
 
 class Accounts extends Component {
-  constructor(props) {
+	  constructor(props) {
     super(props);
     this.state = { accounts: [], current: {} , transactions: []};
   }
@@ -140,27 +133,11 @@ class Accounts extends Component {
           });
         }
       );
+	  console.log(this.state);
+	  console.log(this.props.match.params);
   }
 
   render() {
-    const accountItems = this.state.accounts.map((account, index) => (
-      <Col xs key={index}>
-        <Card className="account-card">
-          <Card.Body>
-            <Card.Title>{account.name}</Card.Title>
-            {account.default ? (
-              <Card.Subtitle className="mb-2 text-muted">default</Card.Subtitle>
-            ) : (
-              ""
-            )}
-          </Card.Body>
-          <Card.Link className="card-hover" href={`/accounts/${account.id}`}>
-            <Card.Footer className="text-muted">#id-{account.id}</Card.Footer>
-          </Card.Link>
-        </Card>
-      </Col>
-    ));
-
 	  const transactionItems = this.state.transactions.map((transaction, index) => (
 	  <tr key={index}>
                     <td>{transaction.id}</td>
@@ -177,17 +154,18 @@ class Accounts extends Component {
         <Container fluid>
           <div className="account-group">
             <Row>
-              {accountItems}
               <Col xs>
                 <NewAccount />
+	    <Cards />
               </Col>
             </Row>
           </div>
           <Row>
-            <Card style={{ margin: "10px", width: "100%" }}>
+            <Card style={{ margin: "10px", width: "50%" }}>
               <Card.Body>
-                <Card.Title>{this.state.current.name}</Card.Title>
-                <h6>Balance: {this.state.current.balance}</h6>
+	    {this.state.current.name}
+	    {this.state.current.balance}
+	    {this.state.current.type}
               </Card.Body>
             </Card>
           </Row>
