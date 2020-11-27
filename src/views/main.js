@@ -2,23 +2,17 @@ import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min";
 
-import { BsGearFill } from "react-icons/bs";
+import Home from "./parts/home";
+import Accounts from "./parts/accounts";
+import Settings from "./parts/settings";
+import NewAccount from "./parts/newaccount";
 
-import Accounts from "./accounts";
-import Settings from "./settings";
-import Cards from "./cards";
-
-import { Nav, Navbar, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Nav, Navbar } from "react-bootstrap";
 
 import { Route, BrowserRouter } from "react-router-dom";
 
 class Main extends Component {
   render() {
-    const renderTooltip = (props) => (
-      <Tooltip id="button-tooltip" {...props}>
-        Settings
-      </Tooltip>
-    );
     return (
       <div>
         <Navbar
@@ -32,25 +26,15 @@ class Main extends Component {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link href="/accounts">Accounts</Nav.Link>
-              <OverlayTrigger
-                placement="right"
-                delay={{ show: 250, hide: 400 }}
-                overlay={renderTooltip}
-              >
-                <Nav.Link href="/settings">
-                  <BsGearFill />
-                </Nav.Link>
-              </OverlayTrigger>
+              <Nav.Link href="/settings">Settings</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
         <BrowserRouter>
-          <Route exact path="/" component={Accounts} />
-          <Route exact path="/accounts" component={Accounts} />
-          <Route exact path="/cards" component={Cards} />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/:accountId" component={Home} />
           <Route exact path="/settings" component={Settings} />
-          <Route exact path="/accounts/:accountId" component={Accounts} />
+          <Route exact path="/new" component={NewAccount} />
         </BrowserRouter>
       </div>
     );
