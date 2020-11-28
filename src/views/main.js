@@ -3,9 +3,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min";
 
 import Home from "./parts/home";
-import Accounts from "./parts/accounts";
 import Settings from "./parts/settings";
-import NewAccount from "./parts/newaccount";
+import Test from "./parts/test";
 
 import { Nav, Navbar } from "react-bootstrap";
 
@@ -23,18 +22,18 @@ class Main extends Component {
           sticky="top"
         >
           <Navbar.Brand href="/">Tracker</Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="mr-auto">
+          <Navbar.Collapse className="justify-content-end">
+	    <Nav className="mr-auto">
               <Nav.Link href="/settings">Settings</Nav.Link>
-            </Nav>
+              <Nav.Link href="/test">Test</Nav.Link>
+	    </Nav>
           </Navbar.Collapse>
         </Navbar>
         <BrowserRouter>
           <Route exact path="/" component={Home} />
-          <Route exact path="/:accountId" component={Home} />
+          <Route exact path="/home/:accountId" component={Home} />
           <Route exact path="/settings" component={Settings} />
-          <Route exact path="/new" component={NewAccount} />
+          <Route exact path="/test" component={Test} />
         </BrowserRouter>
       </div>
     );

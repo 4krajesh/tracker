@@ -2,12 +2,9 @@ import React, { Component } from "react";
 
 import {
   Card,
-  Modal,
-  Button,
   Row,
   Col,
   Container,
-  Form,
 } from "react-bootstrap";
 
 import "../css/home.css";

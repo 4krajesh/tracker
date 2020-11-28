@@ -1,95 +1,153 @@
 import React, { Component } from 'react';
-import {
-  Form,
-} from "react-bootstrap";
 
-import toaster from 'toasted-notes';
-import 'toasted-notes/src/styles.css';
+import { Button, ButtonToolbar, Modal, Form, FormGroup, ControlLabel, FormControl, HelpBlock, Schema, RadioGroup, Radio, Notification} from 'rsuite';
+
 import '../css/new.css';
 
-class NewTransaction extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { validated: false , showT: false };
-  }
-  handleSubmit = (event) => {
+const { StringType, NumberType } = Schema.Types;
+const model = Schema.Model({
+  accountname: StringType().isRequired('This field is required.'),
+  currentbal: NumberType().isRequired('This field is required.'),
+});
 
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    } else {
-            const requestOptions = {
+class CustomField extends React.PureComponent {
+  render() {
+    const { name, message, label, accepter, error, ...props } = this.props;
+    return (
+      <FormGroup className={error ? 'has-error' : ''}>
+        <ControlLabel>{label} </ControlLabel>
+        <FormControl
+          name={name}
+          accepter={accepter}
+          errorMessage={error}
+          {...props}
+        />
+        <HelpBlock>{message}</HelpBlock>
+      </FormGroup>
+    );
+  }
+}
+
+
+function open(funcName, msg) {
+  Notification[funcName]({
+    title: funcName,
+    description: msg
+  });
+}
+
+
+class NewTransaction extends Component {
+	constructor(props) {
+    super(props);
+		this.state = {
+      formValue: {
+        accountname: '',
+        currentbal: '',
+        accounttype: 'General'
+      },
+      show: false,
+      formError: {}
+    };
+    this.close = this.close.bind(this);
+    this.open = this.open.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+	}
+	  close() {
+    this.setState({ show: false });
+  }
+  open() {
+    this.setState({ show: true });
+  }
+  handleChange(value) {
+	  console.log(value);
+    this.setState({
+      formValue: value
+    });
+  }
+	handleSubmit() {
+    const { formValue } = this.state;
+    if (!this.form.check()) {
+      return;
+    }
+		const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', "Access-Control-Allow-Origin":  "*", "Access-Control-Allow-Headers": "X-Requested-With"},
-                body: JSON.stringify({name: document.getElementById('formAccountName').value,
-                balance: document.getElementById('formCurrentBalance').value,
-                type: document.getElementById('formAccountType').value
+                body: JSON.stringify({name: formValue.accountname,
+                balance: formValue.currentbal,
+                type: formValue.accounttype
                 })
             };
         fetch('http://192.168.0.104:3001/createaccount', requestOptions)
         .then(response => response.json())
         .then(function(data){
-    toaster.notify(data.status, {position: 'top-right', duration: 1500});
+		open('error', data.msg);
         });
-    }
-    this.setState({validated: false});
-  };
-  render() {
-    return (
-      <>
-<div className="button-card">
-  <header className="button-card-header">
+  }
+
+	render() {
+		const errorPlacement = 'bottomEnd'
+		return (
+			<>
+<article className="button-card">
+	<header className="button-card-header">
           <h2>Add Transaction</h2>
         </header>
-      <div className="button-tags">
-          <button data-toggle="modal" data-target="#transactionModal">click here</button>
+	<div className="button-tags">
+          <button onClick={this.open}>click here</button>
         </div>
-</div>
-
-<div className="modal fade" id="transactionModal">
-  <div className="modal-dialog">
-    <div className="modal-content">
-
-      <div className="modal-header">
-        <h4 className="modal-title">New Transaction Details</h4>
-        <button type="button" className="close" data-dismiss="modal">&times;</button>
-      </div>
-
-      <Form>
-      <div className="modal-body">
-      <Form.Group controlId="formAccountName" >
-              <Form.Label>Account name</Form.Label>
-              <Form.Control type="text" placeholder="Account name" required/>
-            </Form.Group>
-            <Form.Group controlId="formCurrentBalance">
-              <Form.Label>Current balance</Form.Label>
-              <Form.Control type="number" placeholder="Current balance" maxLength="3" required/>
-            </Form.Group>
-            <Form.Group controlId="formAccountType">
-              <Form.Label>Type</Form.Label>
-              <Form.Control as="select">
-                <option>General</option>
-                <option>Cash</option>
-                <option>Credit card</option>
-                <option>Savings account</option>
-                <option>Current account</option>
-                <option>Investment</option>
-              </Form.Control>
-            </Form.Group>
-
-      </div>
-
-      <div className="modal-footer">
-        <button type="button" className="btn btn-danger" data-dismiss="modal">Close</button>
-      <button type="button" className="btn btn-secondary" onClick={this.handleSubmit}>Submit</button>
-      </div>
-      </Form>
-
-    </div>
-  </div>
-</div>
-      </>
+</article>
+        <Modal show={this.state.show} onHide={this.close} size="xs">
+	        <Form
+	    ref={ref => (this.form = ref)}
+	    fluid
+	    onCheck={formError => {
+            this.setState({ formError });
+          }}
+	    onChange={this.handleChange}
+            formValue={this.state.formValue}
+	    model={model}>
+          <Modal.Header>
+            <Modal.Title>New Transaction</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+    <FormGroup >
+      <ControlLabel>Account Name</ControlLabel>
+      <FormControl name="accountname" errorPlacement={errorPlacement}/>
+    </FormGroup>
+    <FormGroup >
+      <ControlLabel>Current Balance</ControlLabel>
+      <FormControl name="currentbal" type="number" min={1} errorPlacement={errorPlacement}/>
+    </FormGroup>
+	<CustomField
+            name="accounttype"
+            label="Account Type"
+            accepter={RadioGroup}
+            inline
+	    appearance="picker"
+          >
+      <Radio value="General">General</Radio>
+      <Radio value="Cash">Cash</Radio>
+      <Radio value="ewallet">E-Wallet</Radio>
+      <Radio value="Credit Card">Credit Card</Radio>
+      <Radio value="Savings">Savings Account</Radio>
+      <Radio value="Current">Current Account</Radio>
+      <Radio value="Investment">Investment</Radio>
+      <Radio value="Loan">Loan</Radio>
+          </CustomField>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button type="submit" appearance="primary" onClick={this.handleSubmit}>
+              Confirm
+            </Button>
+            <Button onClick={this.close} appearance="subtle">
+              Cancel
+            </Button>
+          </Modal.Footer>
+    </Form>
+        </Modal>
+			</>
                 );
         }
 }

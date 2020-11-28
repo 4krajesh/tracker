@@ -16,7 +16,7 @@
     position: relative;
 }
 
-.button-card:focus-within~.button-card, .button-card:hover~.button-card {
+.button-card:hover~.button-card {
     transform: translateX(60px);
 }
 
@@ -63,6 +63,10 @@
     border-radius: 2rem;
     padding: .2rem .85rem .25rem;
     position: relative;
+}
+
+.button-tags button:focus {
+	outline: none;
 }
 
 .button-tags button:hover {

@@ -1,5 +1,6 @@
 import React from 'react';
 import "../css/accounts.css";
+import { BsStarHalf } from "react-icons/bs";
 
 export default class Cards extends React.Component {
 
@@ -9,19 +10,20 @@ export default class Cards extends React.Component {
 
 		              <header className="account-card-header">
 		      {account.default ? (
-			      <p>default</p>
+				      <p><BsStarHalf /> {account.id}</p>
 			      ) : (
 				      <p>{account.id}</p>
+
 			      )}
           <h2>{account.name}</h2>
         </header>
         <div className="account-tags">
-          <a href={`/${account.id}`}>view</a>
+          <a href={`/home/${account.id}`}>view</a>
 		      {account.default ? (
 		      " " ) : (
 			      <>
-          <a href={`/${account.id}`}>edit</a>
-          <a href={`/${account.id}`}>delete</a>
+          <a href={`/home/${account.id}`}>edit</a>
+          <a href={`/home/${account.id}`}>delete</a>
 			      </>
 		      )}
         </div>
