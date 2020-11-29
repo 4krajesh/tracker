@@ -7,6 +7,7 @@ import 'rsuite/dist/styles/rsuite-default.css';
 
 import Home from "./parts/home";
 import Settings from "./parts/settings";
+import Graphs from "./parts/graphs";
 import Test from "./parts/test";
 
 import "./css/main.css"
@@ -34,14 +35,14 @@ class Main extends Component {
       </Nav>
         <Nav>
         <p>Testing</p>
-        <Nav.Item href="/test" className="inner-1" ><BsFillTerminalFill /></Nav.Item>
+        <Nav.Item href="/test" ><BsFillTerminalFill /></Nav.Item>
       </Nav>
     <Navbar.Header>
       <a href="/" className="navbar-brand">Tracker</a>
     </Navbar.Header>
         <Nav >
-            <p>Charts</p>
-        <Nav.Item href="/test" className="inner-1" ><FaChartPie /></Nav.Item>
+            <p>Graphs</p>
+        <Nav.Item href="/graphs"  ><FaChartPie /></Nav.Item>
 	    </Nav>
       <Nav>
 	    <p>Settings</p>
@@ -54,6 +55,7 @@ class Main extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/home/:accountId" component={Home} />
           <Route exact path="/settings" component={Settings} />
+          <Route exact path="/graphs" component={Graphs} />
           <Route exact path="/test" component={Test} />
         </BrowserRouter>
       </>

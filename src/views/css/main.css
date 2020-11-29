@@ -5,14 +5,14 @@
 
 .rs-navbar { 
     margin-top: -25px;
-    padding-bottom: 25px;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.12), 0 0 10px rgba(0, 0, 0, 0.06);
-    border-bottom-left-radius: 50%;
-    border-bottom-right-radius: 50%;
+    border-bottom-left-radius: 45%;
+    border-bottom-right-radius: 45%;
     text-align: center;
     transition: .5s;
-    overflow: overlay;
-    max-height: 120px;
+    overflow: hidden;
+    max-height: 150px;
+    height: 90px;
 }
 
 .rs-nav-default .rs-nav-item:not(.rs-nav-item-active):not(.rs-nav-item-disabled) > .rs-nav-item-content:hover {
@@ -38,9 +38,6 @@
 	border-radius: 50%;
 }
 
-.inner-1 {
-	padding-top: 15px;
-}
 
 .rs-navbar-nav .rs-nav-item > .rs-nav-item-content{
 	font-size: 16px;
@@ -70,7 +67,7 @@
 
 .navbar-brand {
     margin-top: 20px;
-    padding: 30px;
+    padding: 9px;
     font-size: 25px;
     font-weight: bold;
 }

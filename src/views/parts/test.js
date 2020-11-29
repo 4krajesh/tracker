@@ -26,6 +26,7 @@ export default class Test extends React.Component {
     const { backdrop, show } = this.state;
     return (
       <div className="modal-container">
+	    <h1>Testing</h1>
         <span>Backdrop: </span>
 
         <RadioGroup
