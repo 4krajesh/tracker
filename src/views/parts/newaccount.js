@@ -32,7 +32,7 @@ class CustomField extends React.PureComponent {
 function open(funcName, msg) {
   Notification[funcName]({
     title: funcName,
-    description: <p style={{ width: "300px"}}>msg</p>
+    description: <p style={{ width: "300px"}}>{msg}</p>
   });
 }
 
@@ -82,7 +82,7 @@ class NewAccount extends Component {
         fetch('http://192.168.0.104:3001/createaccount', requestOptions)
         .then(response => response.json())
         .then(function(data){
-		open('error', data.msg);
+		open(data.status, data.msg);
         });
   }
 
