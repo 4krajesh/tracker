@@ -140,12 +140,12 @@ class Home extends Component {
 	    </Col>
           </Row>
           <Row className="show-grid">
-            <Col xs={24}>
+            <Col>
 	    <Transactions transactions={this.state.transactions}/>
             </Col>
           </Row>
 	    <Row className="show-grid">
-            <Col xs={24}>
+            <Col style={{height: "500px"}}>
 	    <BarChart/>
             </Col>
           </Row>

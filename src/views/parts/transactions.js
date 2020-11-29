@@ -30,7 +30,7 @@ class Transactions extends Component {
             <Cell dataKey="id" />
           </Column>
 
-          <Column width={200} fixed>
+          <Column width={200}>
             <HeaderCell>Created At</HeaderCell>
             <Cell dataKey="created_at" />
           </Column>
@@ -40,7 +40,7 @@ class Transactions extends Component {
             <Cell dataKey="value" />
           </Column>
 
-          <Column width={120} fixed="right">
+          <Column width={120}>
             <HeaderCell>Action</HeaderCell>
 
             <Cell>

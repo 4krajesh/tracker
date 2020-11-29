@@ -8,7 +8,6 @@
     min-width: 150px;
     */
     border-radius: 16px;
-    background: #fff;
     height: 150px;
     width: 200px;
     min-width: 150px;
@@ -27,6 +26,7 @@
 
 .button-card:hover {
     transform: translateY(-1rem);
+    background: cyan;
 }
 
 .button-card:not(:first-child) {
@@ -46,7 +46,8 @@
 }
 
 .button-card-header h2:hover {
-    background: linear-gradient(90deg, #1CB5E0 0%, #000851 100%);
+
+	background-image: linear-gradient(to right, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%);
     text-shadow: none;
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
@@ -82,5 +83,5 @@
     -webkit-background-clip: text;
     -webkit-box-decoration-break: clone;
     background-clip: text;
-    border-color: white;
+    border-color: lightskyblue;
 }

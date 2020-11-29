@@ -14,8 +14,8 @@ import "./css/main.css"
 import { Icon, Navbar, Nav, Tooltip, Whisper, Popover} from "rsuite";
 
 import { Route, BrowserRouter } from "react-router-dom";
-import { BsFillTerminalFill } from "react-icons/bs";
-
+import { BsFillTerminalFill, BsWrench, BsFillHouseFill } from "react-icons/bs";
+import { FaChartPie } from "react-icons/fa";
 
 
 class Main extends Component {
@@ -29,19 +29,23 @@ class Main extends Component {
 	    <Navbar>
     <Navbar.Body>
       <Nav>
-    <p>Home</p>
-        <Nav.Item href="/" ><Icon icon="home" /></Nav.Item>
+	<p>Home</p>
+        <Nav.Item href="/" ><BsFillHouseFill /></Nav.Item>
       </Nav>
-	          <Nav>
-            <p>Testing Window</p>
-        <Nav.Item href="/test" ><BsFillTerminalFill /></Nav.Item>
+        <Nav>
+        <p>Testing</p>
+        <Nav.Item href="/test" className="inner-1" ><BsFillTerminalFill /></Nav.Item>
       </Nav>
     <Navbar.Header>
       <a href="/" className="navbar-brand">Tracker</a>
     </Navbar.Header>
-      <Nav pullRight>
+        <Nav >
+            <p>Charts</p>
+        <Nav.Item href="/test" className="inner-1" ><FaChartPie /></Nav.Item>
+	    </Nav>
+      <Nav>
 	    <p>Settings</p>
-        <Nav.Item href="/settings"><Icon icon="cog" /></Nav.Item>
+        <Nav.Item href="/settings"><BsWrench/></Nav.Item>
       </Nav>
     </Navbar.Body>
   </Navbar>
