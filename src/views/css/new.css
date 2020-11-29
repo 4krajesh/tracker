@@ -1,12 +1,16 @@
 .button-card {
-    color: white;
-    height: 150px;
-    width: 200px;
-    min-width: 200px;
-    padding: 1.5rem;
-    border-radius: 16px;
+    /*color: white;
     background: #333;
     box-shadow: -.5rem 0 .5rem #262626;
+    padding: 1.5rem;
+    border-radius: 16px;
+    width: 150px;
+    min-width: 150px;
+    */
+    background: #fff;
+    height: 150px;
+    width: 200px;
+    min-width: 150px;
     display: flex;
     flex-direction: column;
     transition: .2s;
@@ -17,7 +21,7 @@
 }
 
 .button-card:hover~.button-card {
-    transform: translateX(60px);
+    transform: translateX(40px);
 }
 
 .button-card:hover {
@@ -25,10 +29,11 @@
 }
 
 .button-card:not(:first-child) {
-    margin-left: -70px;
+    margin-left: -50px;
 }
 
 .button-card-header h2 {
+    line-height: 25px;
     padding-right: 35px;
     font-size: 20px;
     margin: .25rem 0 auto;
@@ -40,7 +45,7 @@
 }
 
 .button-card-header h2:hover {
-    background: radial-gradient(circle, rgba(222,197,31,1) 0%, rgba(111,103,223,0.28335084033613445) 50%, rgba(252,176,69,1) 100%);;;
+    background: linear-gradient(90deg, #1CB5E0 0%, #000851 100%);
     text-shadow: none;
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;

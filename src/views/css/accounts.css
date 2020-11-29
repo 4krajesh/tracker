@@ -21,14 +21,15 @@ a {
 }
 
 .account-card {
-    color: white;
+    /*color: white;
+    border-radius: 16px;
+    box-shadow: -.5rem 0 .5rem #262626;
+    */
+    background: #fff;
     height: 200px;
     width: 250px;
     min-width: 250px;
-    padding: 1.5rem;
-    border-radius: 16px;
-    background: #333;
-    box-shadow: -.5rem 0 .5rem #262626;
+    padding: 0.5rem;
     display: flex;
     flex-direction: column;
     transition: .2s;

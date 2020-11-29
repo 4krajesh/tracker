@@ -37,14 +37,14 @@ border-bottom-right-radius: 10px;
 
 .button-card-list {
     display: flex;
-    padding: 10px;
+    justify-content: center;
 }
 
 .account-details {
-	background: #333;
-	color: #fff;
-	border-radius: 20px;
-    	box-shadow: 0 5px 10px #262626;
+	margin: 10px;
+}
+.details {
+	height: 150px;
 }
 
 .elements {
@@ -52,12 +52,10 @@ border-bottom-right-radius: 10px;
 }
 
 .element {
-	padding: 10px;
 	text-align: center;
 }
 
 .element p {
 	color: #7a7a8c;
 	font-size: 14px;
-	margin: 5px;
 }

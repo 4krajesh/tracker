@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 
 import {
-  Card,
+	Grid,
+	Panel,
   Row,
   Col,
   Container,
-} from "react-bootstrap";
+} from "rsuite";
 
 import "../css/home.css";
 
@@ -58,19 +59,16 @@ class Home extends Component {
 
     return (
       <div>
-        <Container fluid>
-          <div className="account-group">
-            <Row>
-              <Col xs>
+        <Grid fluid>
+            <Row className="show-grid">
+              <Col >
 	    <Accounts accounts={this.state.accounts}/>
               </Col>
             </Row>
-          </div>
-          <Row>
-	    <Col>
-            <Card className="account-details" style={{ margin: "10px", width: "100%", height: "150px" }}>
-              <Card.Body>
-	      <h3>{this.state.current.name}</h3>
+          <Row className="show-grid account-details">
+	    <Col xs={18}>
+	    <Panel header={this.state.current.name} shaded className="details">
+              <div>
 	      <div className="elements">
 	    <div className="element">
 	    <p>Balance</p>
@@ -81,22 +79,20 @@ class Home extends Component {
 	    <h6>{this.state.current.type}</h6>
 	    </div>
 	    </div>
-              </Card.Body>
-            </Card>
+              </div>
+	    </Panel>
 	    </Col>
-	    <Col xs lg="3">
-	            <div className="button-card-list">
+	    <Col xs={6} className="button-card-list">
                 <NewAccount />
                 <NewTransaction />
-        </div>
 	    </Col>
           </Row>
-          <Row>
+          <Row className="show-grid">
             <Col>
 	    <Transactions transactions={this.state.transactions}/>
             </Col>
           </Row>
-        </Container>
+        </Grid>
       </div>
     );
   }

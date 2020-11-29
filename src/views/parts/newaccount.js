@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Button, ButtonToolbar, Modal, Form, FormGroup, ControlLabel, FormControl, HelpBlock, Schema, RadioGroup, Radio, Notification} from 'rsuite';
+import { Panel, Button, ButtonToolbar, Modal, Form, FormGroup, ControlLabel, FormControl, HelpBlock, Schema, RadioGroup, Radio, Notification} from 'rsuite';
 
 import '../css/new.css';
 
@@ -32,7 +32,7 @@ class CustomField extends React.PureComponent {
 function open(funcName, msg) {
   Notification[funcName]({
     title: funcName,
-    description: msg
+    description: <p style={{ width: "300px"}}>msg</p>
   });
 }
 
@@ -88,17 +88,18 @@ class NewAccount extends Component {
 
 	render() {
 		const errorPlacement = 'bottomEnd'
+		const backdrop = true;
 		return (
 			<>
-<article className="button-card">
+<Panel className="button-card" shaded>
 	<header className="button-card-header">
           <h2>Add Account</h2>
         </header>
 	<div className="button-tags">
           <button onClick={this.open}>click here</button>
         </div>
-</article>
-        <Modal show={this.state.show} onHide={this.close} size="xs">
+</Panel>
+        <Modal backdrop={backdrop} show={this.state.show} onHide={this.close} size="xs">
 	        <Form
 	    ref={ref => (this.form = ref)}
 	    fluid

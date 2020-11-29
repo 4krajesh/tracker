@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import Table from 'react-bootstrap/Table'
+import { Table } from 'rsuite';
+
+const { Column, HeaderCell, Cell, Pagination } = Table;
 
 class Transactions extends Component {
 	render() {
@@ -14,17 +16,48 @@ class Transactions extends Component {
 		
 
 		return (
-		<Table hover>
-                <thead>
-                  <tr>
-                    <th>#ID</th>
-                    <th>Value</th>
-                  </tr>
-                </thead>
-                <tbody>
-			{items}
-                </tbody>
-              </Table>
+			<div>
+        <Table
+          height={400}
+          data={this.props.transactions}
+          onRowClick={data => {
+            console.log(data);
+          }}
+        >
+          <Column width={70} align="center" fixed>
+            <HeaderCell>Id</HeaderCell>
+            <Cell dataKey="id" />
+          </Column>
+
+          <Column width={200} fixed>
+            <HeaderCell>Created At</HeaderCell>
+            <Cell dataKey="created_at" />
+          </Column>
+
+          <Column width={200}>
+            <HeaderCell>Value</HeaderCell>
+            <Cell dataKey="value" />
+          </Column>
+
+          <Column width={120} fixed="right">
+            <HeaderCell>Action</HeaderCell>
+
+            <Cell>
+              {rowData => {
+                function handleAction() {
+                  alert(`id:${rowData.id}`);
+                }
+                return (
+                  <span>
+                    <a onClick={handleAction}> Edit </a> |{' '}
+                    <a onClick={handleAction}> Remove </a>
+                  </span>
+                );
+              }}
+            </Cell>
+          </Column>
+        </Table>
+      </div>
                 );
         }
 }

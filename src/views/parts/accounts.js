@@ -1,12 +1,15 @@
 import React from 'react';
 import "../css/accounts.css";
+
+import { Panel, PanelGroup } from 'rsuite';
+
 import { BsStarHalf } from "react-icons/bs";
 
 export default class Cards extends React.Component {
 
   render() {
 	      const accountItems = this.props.accounts.map((account, index) => (
-		            <article className="account-card" key={index}>
+		            <Panel shaded className="account-card" key={index}>
 
 		              <header className="account-card-header">
 		      {account.default ? (
@@ -27,7 +30,7 @@ export default class Cards extends React.Component {
 			      </>
 		      )}
         </div>
-      </article>
+      </Panel>
     ));
     return (
 	<div className="account-card-list">
