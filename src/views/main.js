@@ -9,6 +9,8 @@ import Home from "./parts/home";
 import Settings from "./parts/settings";
 import Test from "./parts/test";
 
+import "./css/main.css"
+
 import { Icon, Navbar, Nav } from "rsuite";
 
 import { Route, BrowserRouter } from "react-router-dom";
@@ -16,10 +18,10 @@ import { Route, BrowserRouter } from "react-router-dom";
 class Main extends Component {
   render() {
     return (
-      <div>
+      <>
 	    <Navbar>
     <Navbar.Header>
-      <a href="/" className="navbar-brand logo">Tracker</a>
+      <a href="/" className="navbar-brand">Tracker</a>
     </Navbar.Header>
     <Navbar.Body>
       <Nav>
@@ -37,7 +39,7 @@ class Main extends Component {
           <Route exact path="/settings" component={Settings} />
           <Route exact path="/test" component={Test} />
         </BrowserRouter>
-      </div>
+      </>
     );
   }
 }

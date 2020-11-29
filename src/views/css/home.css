@@ -45,6 +45,7 @@ border-bottom-right-radius: 10px;
 }
 .details {
 	height: 150px;
+	border-radius: 16px;
 }
 
 .elements {
@@ -53,6 +54,8 @@ border-bottom-right-radius: 10px;
 
 .element {
 	text-align: center;
+    margin: 0 10px 0 30px;
+
 }
 
 .element p {

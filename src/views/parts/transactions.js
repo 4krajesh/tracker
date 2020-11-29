@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table } from 'rsuite';
+import { Table, Panel } from 'rsuite';
 
 const { Column, HeaderCell, Cell, Pagination } = Table;
 
@@ -16,7 +16,8 @@ class Transactions extends Component {
 		
 
 		return (
-			<div>
+			<>
+			 <Panel header="Transactions" shaded style={{ margin: "10px", borderRadius: "16px"}}>
         <Table
           height={400}
           data={this.props.transactions}
@@ -57,7 +58,8 @@ class Transactions extends Component {
             </Cell>
           </Column>
         </Table>
-      </div>
+			</Panel>
+      </>
                 );
         }
 }

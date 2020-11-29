@@ -88,7 +88,7 @@ class Home extends Component {
 	    </Col>
           </Row>
           <Row className="show-grid">
-            <Col>
+            <Col xs={24}>
 	    <Transactions transactions={this.state.transactions}/>
             </Col>
           </Row>
