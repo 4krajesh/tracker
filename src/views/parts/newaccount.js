@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 
-import { Panel, Button, ButtonToolbar, Modal, Form, FormGroup, ControlLabel, FormControl, HelpBlock, Schema, RadioGroup, Radio, Notification} from 'rsuite';
+import { 
+	Panel, 
+	Button, 
+	Modal, 
+	Form, FormGroup, ControlLabel, FormControl, HelpBlock, Schema, RadioGroup, Radio, Notification} from 'rsuite';
 
 import '../css/new.css';
 
