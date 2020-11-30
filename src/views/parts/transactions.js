@@ -17,7 +17,7 @@ class Transactions extends Component {
 
 		return (
 			<>
-			 <Panel header="Transactions" shaded style={{ margin: "10px", borderRadius: "16px"}}>
+			 <Panel header="Transactions" shaded style={{ margin: "10px", borderRadius: "16px"}} bodyFill>
         <Table
           height={400}
           data={this.props.transactions}

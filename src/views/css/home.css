@@ -42,19 +42,19 @@ body {
 	font-size: 14px;
 }
 
-.fade-enter > .details {
+.fade-enter > .change {
   opacity: 0;
 }
-.fade-enter-active > .details {
+.fade-enter-active > .change {
   opacity: 1;
 }
-.fade-exit > .details {
+.fade-exit > .change {
   opacity: 1;
 }
-.fade-exit-active > .details {
+.fade-exit-active > .change {
   opacity: 0;
 }
-.fade-enter-active > .details,
-.fade-exit-active > .details {
+.fade-enter-active > .change,
+.fade-exit-active > .change {
   transition: opacity .6s;
 }

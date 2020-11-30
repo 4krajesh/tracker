@@ -16,6 +16,9 @@ export default class Test extends React.Component {
   render() {
     return (
 	      <Grid fluid>
+	    <Row className="show-grid">
+	    <h1>Test</h1>
+	    </Row>
     <Row className="show-grid">
       <Col xs={12}>
 	    <div className="test-card-list">

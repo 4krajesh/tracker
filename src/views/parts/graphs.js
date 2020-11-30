@@ -15,6 +15,7 @@ export default class Graphs extends React.Component {
 	  const show = true;
     return (
 	    <>
+	    <h1>Graphs</h1>
 	    <BarChart/>
 	    </>
     );
