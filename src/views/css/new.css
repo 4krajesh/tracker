@@ -13,7 +13,7 @@
     min-width: 150px;
     display: flex;
     flex-direction: column;
-    transition: .2s;
+    transition: .4s;
     margin: 0;
     scroll-snap-align: start;
     clear: both;
@@ -21,16 +21,20 @@
 }
 
 .button-card:hover~.button-card {
-    transform: translateX(40px);
+    transform: translateX(80px);
 }
 
 .button-card:hover {
-    transform: translateY(-1rem);
+    transform: translate(2rem, -2rem);
     background: cyan;
 }
 
-.button-card:not(:first-child) {
-    margin-left: -50px;
+.details:hover~.button-card {
+ transform: translateX(40px);
+}
+
+.button-card {
+    margin-left: -80px;
 }
 
 .button-card-header h2 {

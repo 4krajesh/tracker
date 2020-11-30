@@ -12,40 +12,44 @@ import Test from "./parts/test";
 
 import "./css/main.css"
 
-import { Icon, Navbar, Nav, Tooltip, Whisper, Popover} from "rsuite";
+import { Navbar, Nav, Tag } from "rsuite";
 
 import { Route, BrowserRouter } from "react-router-dom";
 import { BsFillTerminalFill, BsWrench, BsFillHouseFill } from "react-icons/bs";
 import { FaChartPie } from "react-icons/fa";
 
-
 class Main extends Component {
 	  constructor(props) {
     super(props);
-    this.mainRef = React.createRef();
   }
+  componentDidMount() {
+	  setTimeout(() => {
+	  document.body.style.transition = 'opacity .2s ease-in-out .2s';
+	  document.body.style.opacity = 1;
+}, 100);
+}
   render() {
     return (
       <>
-	    <Navbar>
+   <Navbar id="navbar">
     <Navbar.Body>
       <Nav>
-	<p>Home</p>
-        <Nav.Item href="/" ><BsFillHouseFill /></Nav.Item>
+	<Tag>Home</Tag>
+        <Nav.Item href="/"><BsFillHouseFill /></Nav.Item>
       </Nav>
-        <Nav>
-        <p>Testing</p>
+      <Nav>
+	<Tag>Testing</Tag>
         <Nav.Item href="/test" ><BsFillTerminalFill /></Nav.Item>
       </Nav>
     <Navbar.Header>
-      <a href="/" className="navbar-brand">Tracker</a>
+      <a href="#" className="navbar-brand">Tracker</a>
     </Navbar.Header>
         <Nav >
-            <p>Graphs</p>
-        <Nav.Item href="/graphs"  ><FaChartPie /></Nav.Item>
-	    </Nav>
+	<Tag>Graphs</Tag>
+          <Nav.Item href="/graphs"  ><FaChartPie /></Nav.Item>
+       </Nav>
       <Nav>
-	    <p>Settings</p>
+	<Tag>Settings</Tag>
         <Nav.Item href="/settings"><BsWrench/></Nav.Item>
       </Nav>
     </Navbar.Body>

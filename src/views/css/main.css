@@ -60,6 +60,7 @@
 }
 
 .rs-navbar-header {
+	height: 65px;
     width: 100px;
     justify-content: center;
     display: flex;
@@ -67,7 +68,7 @@
 
 .navbar-brand {
     margin-top: 20px;
-    padding: 9px;
+    padding: 13px;
     font-size: 25px;
     font-weight: bold;
 }
@@ -79,4 +80,15 @@
 	    -webkit-background-clip: text;
 	    background-clip: text;
 	    text-decoration: none;
+}
+
+.rs-nav > ul {
+    display: grid;
+}
+
+.rs-tag {
+	padding: 0px;
+	font-size: 14px;
+	font-weight: bold;
+	background-color: transparent;
 }

@@ -32,7 +32,7 @@ a {
     padding: 0.5rem;
     display: flex;
     flex-direction: column;
-    transition: .2s;
+    transition: .4s;
     margin: 0;
     scroll-snap-align: start;
     clear: both;
@@ -45,10 +45,7 @@ a {
 
 .account-card:hover {
     transform: translateY(-1rem);
-    /*background-image: radial-gradient( circle 1224px at 10.6% 8.8%,  rgba(255,255,255,1) 0%, rgba(153,202,251,1) 100.2% );
-
-    background-image: radial-gradient( circle 867px at -5.8% 1.8%,  rgba(255,255,255,1) 0%, rgba(7,0,216,1) 100.3% );*/
-    background: cyan;
+    background: #333;
 }
 
 .account-card:not(:first-child) {
@@ -76,8 +73,9 @@ a {
     cursor: pointer;
 }
 
-.account-card-header h2:hover {
+.account-card:hover h2 {
     background: linear-gradient(90deg,#ff8a00,#e52e71);
+    background-color: #333;
     text-shadow: none;
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
@@ -117,7 +115,7 @@ a {
     position: relative;
 }
 
-.account-tags a:hover {
+.account-tags a:hover, .account-tags a:focus{
     background: linear-gradient(90deg,#ff8a00,#e52e71);
     text-shadow: none;
     -webkit-text-fill-color: transparent;

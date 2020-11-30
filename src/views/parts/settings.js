@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 
+import "./test.css"
 class Settings extends Component {
+	constructor(props) {
+    super(props);
+    };
+  componentDidMount() {
+  }
 	render() {
 
 		return (

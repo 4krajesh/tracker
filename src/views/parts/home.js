@@ -12,23 +12,24 @@ import {
 import "../css/home.css";
 import "../css/accounts.css";
 
-import BarChart from "./bar";
 import NewAccount from "./newaccount";
 import Transactions from "./transactions";
 import NewTransaction from "./newtransaction";
+
+import { SwitchTransition, CSSTransition } from "react-transition-group";
 
 
 class Home extends Component {
 	  constructor(props) {
     super(props);
-    this.state = { accounts: [], id: 'all' , current: {}, transactions: []};
+    this.state = { accounts: [], id: 'all' , current: {}, transactions: [], changeDetails: false};
   }
 
   setDefaultVal(value, defaultValue) {
     return value === undefined ? defaultValue : value;
   }
 
- stateUpdater(id){
+ stateUpdater(id, t){
 	 console.log("updater");
 	     fetch("http://192.168.0.104:3001/accounts")
       .then((res) => res.json())
@@ -51,36 +52,13 @@ class Home extends Component {
             error,
           });
         }
-      );
+      );                
+	 if(t)
+	   this.setState({changeDetails: !this.state.changeDetails});
  }
-
   componentDidMount() {
-	   console.log('mount');
-             fetch("http://192.168.0.104:3001/accounts")
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            accounts: result.accounts,
-            transactions: result.transactions,
-          });
-          const account = result.accounts.filter(
-            (account) => account.id === 'all'
-          );
-          this.setState({ current: account[0] });
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        (error) => {
-          this.setState({
-            error,
-          });
-        }
-      );
-
+	  this.stateUpdater(this.state.id, false);
   }
-
   render() {
 	  	      const accountItems = this.state.accounts.map((account, index) => (
 		            <Panel shaded className="account-card" key={index}>
@@ -95,18 +73,19 @@ class Home extends Component {
           <h2>{account.name}</h2>
         </header>
         <div className="account-tags">
-          <a href="#" onClick={() => this.stateUpdater(account.id)}>view</a>
+          <a href="#" onClick={() => this.stateUpdater(account.id, true)}>view</a>
 		      {account.default ? (
 		      " " ) : (
 			      <>
           <a href="#">edit</a>
-          <a href="#">delete</a>
+          <a href="#">remove</a>
 			      </>
 		      )}
         </div>
       </Panel>
     ));
 
+	  const { changeDetails } = this.state;
     return (
       <div>
         <Grid fluid>
@@ -118,7 +97,17 @@ class Home extends Component {
               </Col>
             </Row>
           <Row className="show-grid account-details">
-	    <Col xs={18}>
+	<SwitchTransition mode='out-in'>
+          <CSSTransition
+            key={changeDetails}
+            addEndListener={(node, done) => {
+              console.log(node, done);
+
+              node.addEventListener("transitionend", done, false);
+            }}
+            classNames="fade"
+          >
+	    <Col style={{ display: 'flex'}}>
 	    <Panel header={this.state.current.name} shaded className="details">
               <div>
 	      <div className="elements">
@@ -133,20 +122,15 @@ class Home extends Component {
 	    </div>
               </div>
 	    </Panel>
-	    </Col>
-	    <Col xs={6} className="button-card-list">
 	    <NewAccount />
                 <NewTransaction />
 	    </Col>
+	</CSSTransition>
+        </SwitchTransition>
           </Row>
           <Row className="show-grid">
             <Col>
 	    <Transactions transactions={this.state.transactions}/>
-            </Col>
-          </Row>
-	    <Row className="show-grid">
-            <Col style={{height: "500px"}}>
-	    <BarChart/>
             </Col>
           </Row>
         </Grid>

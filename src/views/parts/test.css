@@ -1,3 +1,99 @@
 .rs-picker-menu.fade.in {
 	opacity: 1;
 }
+
+.test-card-list {
+    display: flex;
+    justify-content: center;
+}
+
+
+
+.test-card {
+    /*color: white;
+    background: #333;
+    box-shadow: -.5rem 0 .5rem #262626;
+    padding: 1.5rem;
+    border-radius: 16px;
+    width: 150px;
+    min-width: 150px;
+    */
+    border-radius: 16px;
+    height: 150px;
+    width: 200px;
+    min-width: 150px;
+    display: flex;
+    flex-direction: column;
+    transition: .2s;
+    margin: 0;
+    scroll-snap-align: start;
+    clear: both;
+    position: relative;
+}
+
+.test-card:hover~.test-card {
+    transform: translateX(40px);
+}
+
+.test-card:not(:first-child):hover {
+    transform: translateY(-1rem);
+    background: cyan;
+}
+
+.test-card:not(:first-child) {
+    margin-left: -50px;
+}
+
+.test-card-header h2 {
+    line-height: 25px;
+    padding-right: 40px;
+    font-size: 20px;
+    margin: .25rem 0 auto;
+    text-decoration: none;
+    color: inherit;
+    border: 0;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.test-card-header h2:hover {
+
+	background-image: linear-gradient(to right, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%);
+    text-shadow: none;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.test-tags {
+	margin: 10px 0 0 0;
+}
+
+.test-tags button {
+    background: none;
+    font-style: normal;
+    font-weight: 700;
+    font-size: .5rem;
+    color: #7a7a8c;
+    text-transform: uppercase;
+    font-size: .66rem;
+    border: 3px solid #28242f;
+    border-radius: 2rem;
+    padding: .2rem .85rem .25rem;
+    position: relative;
+}
+
+.test-tags button:focus {
+	outline: none;
+}
+
+.test-tags button:hover {
+    background: linear-gradient(90deg,#ff8a00,#e52e71);
+    text-shadow: none;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-box-decoration-break: clone;
+    background-clip: text;
+    border-color: lightskyblue;
+}
+

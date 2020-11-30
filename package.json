@@ -6,9 +6,9 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "@types/react-transition-group": "^4.4.0",
     "babel-preset-react": "^6.24.1",
     "babelify": "^10.0.0",
-    "bootstrap": "^4.5.0",
     "chart.js": "^2.9.4",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
@@ -19,7 +19,7 @@
     "react-icons": "^3.11.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
-    "rsuite": "^4.8.5"
+    "rsuite": "4.7.0"
   },
   "scripts": {
     "start": "PORT=5000 react-scripts start",

@@ -1,5 +1,6 @@
 body {
 	background: salmon; 
+	opacity: 0;
 }
 
 .rs-panel {
@@ -17,6 +18,13 @@ body {
 .details {
 	height: 150px;
 	border-radius: 16px;
+	    max-width: 100%;
+	    min-width: fit-content;
+    width: 100%;
+}
+
+.details:hover {
+	background: cyan;
 }
 
 .elements {
@@ -32,4 +40,21 @@ body {
 .element p {
 	color: #7a7a8c;
 	font-size: 14px;
+}
+
+.fade-enter > .details {
+  opacity: 0;
+}
+.fade-enter-active > .details {
+  opacity: 1;
+}
+.fade-exit > .details {
+  opacity: 1;
+}
+.fade-exit-active > .details {
+  opacity: 0;
+}
+.fade-enter-active > .details,
+.fade-exit-active > .details {
+  transition: opacity .6s;
 }
