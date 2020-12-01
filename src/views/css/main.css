@@ -13,18 +13,6 @@ a:focus {
     border-bottom-right-radius: 45%;
     text-align: center;
     transition: .5s;
-    overflow: hidden;
-    max-height: 150px;
-    height: 90px;
-}
-
-.rs-nav-default .rs-nav-item:not(.rs-nav-item-active):not(.rs-nav-item-disabled) > .rs-nav-item-content:hover {
-	background: lightsalmon;
-	border-radius: 50%;
-}
-
-.rs-nav-default .rs-nav-item:not(.rs-nav-item-active):not(.rs-nav-item-disabled) > .rs-nav-item-content:focus {
-	background: none;
 }
 
 .rs-navbar-body {
@@ -34,35 +22,39 @@ a:focus {
 .rs-navbar:hover {
 	transform: translateY(25px);
 	color: #333;
-	background: #fff;
+	background: aqua;
 }
-
-.rs-navbar-nav .rs-nav-item:not(.rs-nav-item-disabled) > .rs-nav-item-content, .rs-navbar-nav .rs-dropdown > .rs-dropdown-toggle {
-	border-radius: 50%;
-}
-
 
 .rs-navbar-nav .rs-nav-item > .rs-nav-item-content{
 	font-size: 16px;
-	height: 52px;
-        width: 52px;
-}
-.rs-nav-item > .rs-nav-item-content > .rs-icon {
-	margin-right: 0;
+	height: 60px;
+	width: 60px;
+	padding: 0;
+  	display: flex;
+  	justify-content: center;
+  	align-items: center;
 }
 
-.rs-icon {
-	font-size: large;
+.rs-nav-default .rs-nav-item:not(.rs-nav-item-active):not(.rs-nav-item-disabled) > .rs-nav-item-content:hover,
+.rs-nav-default .rs-nav-item:not(.rs-nav-item-active):not(.rs-nav-item-disabled) > .rs-nav-item-content:hover {
+	background: lightsalmon;
 }
-.rs-navbar-nav p {
-	font-weight: bold;
+.rs-nav-default .rs-nav-item:not(.rs-nav-item-active):not(.rs-nav-item-disabled) > .rs-nav-item-content,
+.rs-nav-default .rs-nav-item:not(.rs-nav-item-active):not(.rs-nav-item-disabled) > .rs-nav-item-content {
+  border-radius: 50%;
+
 }
-.rs-nav-item {
-	height: 52px;
-	width: 52px;
+
+.rs-nav.rs-nav-horizontal .rs-nav-item.inner-1 {
+	margin-top: 17px;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
 }
 
 .rs-navbar-header {
+	    margin-top: 40px;
 	height: 65px;
     width: 100px;
     justify-content: center;
@@ -70,9 +62,8 @@ a:focus {
 }
 
 .navbar-brand {
-    margin-top: 20px;
     padding: 13px;
-    font-size: 25px;
+    font-size: 30px;
     font-weight: bold;
 }
 

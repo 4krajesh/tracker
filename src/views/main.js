@@ -39,14 +39,14 @@ class Main extends Component {
       </Nav>
       <Nav>
 	<Tag>Testing</Tag>
-        <Nav.Item href="/test" ><BsFillTerminalFill /></Nav.Item>
+        <Nav.Item href="/test" className="inner-1"><BsFillTerminalFill /></Nav.Item>
       </Nav>
     <Navbar.Header>
       <a href="#" className="navbar-brand">Tracker</a>
     </Navbar.Header>
         <Nav >
-	<Tag>Graphs</Tag>
-          <Nav.Item href="/graphs"  ><FaChartPie /></Nav.Item>
+	<Tag>Dashboard</Tag>
+          <Nav.Item href="/graphs" className="inner-1"><FaChartPie /></Nav.Item>
        </Nav>
       <Nav>
 	<Tag>Settings</Tag>
