@@ -106,6 +106,7 @@ class EditTransaction extends Component {
 	    fluid
 	    onCheck={formError => {
             this.setState({ formError });
+		    console.log(formError);
           }}
 	    onChange={this.handleChange}
             formValue={this.state.formValue}

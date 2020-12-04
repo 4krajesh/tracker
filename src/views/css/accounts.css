@@ -5,6 +5,7 @@ a {
 }
 
 .account-card-list {
+    margin-top: 30px;
     display: flex;
     padding: 3rem;
     overflow-x: scroll;
@@ -23,13 +24,13 @@ a {
 .account-card {
     /*color: white;
     box-shadow: -.5rem 0 .5rem #262626;
+    padding: 0.5rem;
     */
     border-radius: 16px;
     background: #fff;
-    height: 200px;
+    height: 300px;
     width: 250px;
     min-width: 250px;
-    padding: 0.5rem;
     display: flex;
     flex-direction: column;
     transition: .4s;
@@ -39,6 +40,36 @@ a {
     position: relative;
 }
 
+.account-body {
+	color: transparent;
+	height: 100px;
+}
+.account-card:hover .account-body h6 {
+	font-size: 16px;
+}
+.account-card:hover .account-body p {
+	    line-height: 20px;
+	font-size: 12px;
+	color: #7a7a8c;
+}
+
+.account-card:hover .account-body {
+	color: tomato;
+}
+
+.account-delete-button {
+    position: absolute;
+    top: 0;
+    right: -2px;
+    border-radius: 0px 0px 0px 30px;
+    background: transparent;
+    color: #fff;
+}
+
+.account-delete-button:hover, .account-delete-button:focus{
+	color: tomato;
+	background: transparent;
+}
 .account-card:hover~.account-card {
     transform: translateX(130px);
 }
@@ -73,7 +104,7 @@ a {
     cursor: pointer;
 }
 
-.account-card:hover h2 {
+.account-card:hover h2{
     background: linear-gradient(90deg,#ff8a00,#e52e71);
     background-color: #333;
     text-shadow: none;
@@ -101,7 +132,8 @@ a {
     margin-bottom: 0;
 }
 
-.account-tags a {
+.account-tags button {
+	background: transparent;
     margin: 2px;
     font-style: normal;
     font-weight: 700;
@@ -115,7 +147,7 @@ a {
     position: relative;
 }
 
-.account-tags a:hover, .account-tags a:focus{
+.account-tags button:hover, .account-tags button:focus{
     background: linear-gradient(90deg,#ff8a00,#e52e71);
     text-shadow: none;
     -webkit-text-fill-color: transparent;

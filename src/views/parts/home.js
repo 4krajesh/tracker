@@ -1,7 +1,11 @@
 import React, { Component } from "react";
-import { BsStarHalf } from "react-icons/bs";
 
-import { Table, Grid, Panel, Row, Col } from "rsuite";
+import { BsChevronDoubleRight, BsCreditCard,  BsStarHalf, BsTrashFill } from "react-icons/bs";
+import { FcMoneyTransfer } from "react-icons/fc";
+import { FaAngleDoubleRight } from "react-icons/fa";
+
+
+import { Tooltip, Whisper, ButtonToolbar, Notification, Button, Table, Grid, Panel, Row, Col } from "rsuite";
 
 import "../css/home.css";
 import "../css/accounts.css";
@@ -12,6 +16,35 @@ import EditTransaction from "./edittransaction";
 
 import { SwitchTransition, CSSTransition } from "react-transition-group";
 const { Column, HeaderCell, Cell, Pagination } = Table;
+
+
+function deleteAccount(id) {
+  Notification.warning({
+    title: 'Account Delete',
+    duration: 10000,
+    description: (
+      <div>
+        <p>Are you sure you want to delete account with id: {id}?</p>
+	    <ButtonToolbar>
+          <Button
+            onClick={() => {
+              Notification.close();
+            }}
+          >
+            Accept
+          </Button>
+          <Button
+            onClick={() => {
+              Notification.close();
+            }}
+          >
+            Cancel
+          </Button>
+	    </ButtonToolbar>
+      </div>
+    )
+  });
+}
 
 class Home extends Component {
   constructor(props) {
@@ -50,7 +83,7 @@ class Home extends Component {
     return value === undefined ? defaultValue : value;
   }
 
-  stateUpdater(id, transition) {
+  stateUpdater(id) {
     fetch("http://192.168.0.104:3001/accounts")
       .then((res) => res.json())
       .then(
@@ -59,10 +92,11 @@ class Home extends Component {
             accounts: result.accounts,
             transactions: result.transactions,
           });
-          const account = result.accounts.filter(
+        const account = result.accounts.filter(
             (account) => account.id === id
-          );
-          this.setState({ current: account[0] });
+        );
+
+        this.setState({ current: account[0] });
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
@@ -73,7 +107,6 @@ class Home extends Component {
           });
         }
       );
-    if (transition) this.setState({ changeDetails: !this.state.changeDetails });
   }
   componentDidMount() {
     this.stateUpdater(this.state.id, false);
@@ -150,7 +183,18 @@ class Home extends Component {
     }, 500);
   }
 
-  render() {
+  accountDetails(id) {
+	  console.log("here");
+        const account = this.state.accounts.filter(
+            (account) => account.id === id
+        );
+
+        this.setState({ current: account[0] });
+        this.setState({ changeDetails: !this.state.changeDetails });
+	console.log(this.state.current);
+  }
+
+   render() {
     const items = [];
     for (const [index, value] of this.state.transactions.entries()) {
       if (index === 0)
@@ -188,20 +232,46 @@ class Home extends Component {
               <BsStarHalf /> {account.id}
             </p>
           ) : (
+		  <>
+	    <Button className="account-delete-button" onClick={() => deleteAccount(account.id)}><BsTrashFill/></Button>
             <p>{account.id}</p>
+		  </>
           )}
           <h2>{account.name}</h2>
         </header>
+	<div className="account-body">
+	    <Grid>
+	    <Row className="show-grid">
+	    <Col xs={2}>
+	    <p>Balance</p>
+	    <h6>{account.balance}</h6>
+	    <p>Type</p>
+	    <h6>{account.type}</h6>
+	    </Col>
+	    <Col xs={2}>
+            { account.limit ? ( <>
+		    <p>Credit Limit</p>
+	    	    <h6>{account.limit}</h6> </>
+            ) : (<></>)
+            }
+            { account.bank ? ( <>
+                          <p>Bank</p>
+                          <h6>{account.bank}</h6> </>
+	) : (<></>)
+            }
+	    </Col>
+	    </Row>
+	    </Grid>
+	</div>
         <div className="account-tags">
-          <a href="#" onClick={() => this.stateUpdater(account.id, true)}>
+          <Button onClick={() => this.accountDetails(account.id)}>
             view
-          </a>
+          </Button>
           {account.default ? (
             " "
           ) : (
             <>
-              <a href="#">edit</a>
-              <a href="#">remove</a>{" "}
+              <Button>edit</Button>
             </>
           )}
         </div>
@@ -213,6 +283,18 @@ class Home extends Component {
         <Grid fluid>
           <Row className="show-grid">
             <Col>
+	    <div className="adder">
+	       <Whisper placement="top" trigger="hover" speaker={
+  <Tooltip>
+    New Account
+  </Tooltip>}>
+	       <Button > <BsCreditCard/> </Button>
+    	       </Whisper>
+	       <Whisper placement="top" trigger="hover" speaker={<Tooltip>New Transaction</Tooltip>}>
+	      <Button > <FcMoneyTransfer/> </Button>
+    	       </Whisper>
+	      <Button className="animate"> <FaAngleDoubleRight/> </Button>
+	    </div>
               <div className="account-card-list">{accountItems}</div>
             </Col>
           </Row>
@@ -234,6 +316,10 @@ class Home extends Component {
                     <div>
                       <div className="elements">
                         <div className="element">
+                          <p>ID</p>
+                          <h6>{this.state.current.id}</h6>
+                        </div>
+                        <div className="element">
                           <p>Balance</p>
                           <h6>{this.state.current.balance}</h6>
                         </div>
@@ -241,6 +327,18 @@ class Home extends Component {
                           <p>Type</p>
                           <h6>{this.state.current.type}</h6>
                         </div>
+	    { this.state.current.type === 'Credit' ? (
+                        <div className="element">
+                          <p>Limit</p>
+                          <h6>{this.state.current.limit}</h6>
+                        </div>) : (<></>)
+	    }
+	    { ['Credit', 'Savings', 'Current'].includes(this.state.current.type) ? (
+                        <div className="element">
+                          <p>Bank</p>
+                          <h6>{this.state.current.bank}</h6>
+                        </div>) : (<></>)
+            }
                       </div>
                     </div>
                   </Panel>

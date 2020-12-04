@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { 
+	SelectPicker,
 	Panel, 
 	Button, 
 	Modal, 
@@ -46,6 +47,7 @@ class NewAccount extends Component {
     super(props);
 		this.state = {
       formValue: {
+	bankname: 'Kotak',
         accountname: '',
         currentbal: '',
         accounttype: 'General'
@@ -93,6 +95,15 @@ class NewAccount extends Component {
 	render() {
 		const errorPlacement = 'bottomEnd'
 		const backdrop = true;
+		const banks = [
+  {
+    "label": "Kotak",
+    "value": "Kotak",
+  },
+  {
+    "label": "Citi",
+    "value": "Citi",
+  }]
 		return (
 			<>
 <Panel className="button-card" shaded>
@@ -125,6 +136,15 @@ class NewAccount extends Component {
       <ControlLabel>Current Balance</ControlLabel>
       <FormControl name="currentbal" type="number" min={1} errorPlacement={errorPlacement}/>
     </FormGroup>
+          <CustomField
+            name="bankname"
+            label="Bank Name"
+            accepter={SelectPicker}
+	    data={banks}
+            block
+          >
+          </CustomField>
+
 	<CustomField
             name="accounttype"
             label="Account Type"
