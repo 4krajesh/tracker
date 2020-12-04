@@ -7,11 +7,15 @@ import { Grid, Row, Col } from 'rsuite';
 
 import "./test.css"
 
+
 export default class Test extends React.Component {
 	constructor(props) {
     super(props);
+		this.state = { edit: false };
+		this.editAction = this.editAction.bind(this);
     };
-  componentDidMount() {
+  editAction(){
+	  this.setState({edit: true});
   }
   render() {
     return (
@@ -20,33 +24,9 @@ export default class Test extends React.Component {
 	    <h1>Test</h1>
 	    </Row>
     <Row className="show-grid">
-      <Col xs={12}>
-	    <div className="test-card-list">
-	    <Panel className="test-card" shaded>
-        <header className="test-card-header">
-          <h2>Add Account</h2>
-        </header>
-        <div className="test-tags">
-          <button onClick={this.open}>click here</button>
-        </div>
-</Panel>
-	    <Panel className="test-card" shaded>
-        <header className="test-card-header">
-          <h2>Add Account</h2>
-        </header>
-        <div className="test-tags">
-          <button onClick={this.open}>click here</button>
-        </div>
-</Panel>
-	    <Panel className="test-card" shaded>
-        <header className="test-card-header">
-          <h2>Add Account</h2>
-        </header>
-        <div className="test-tags">
-          <button onClick={this.open}>click here</button>
-        </div>
-</Panel>
-            </div>
+	    <Col>
+	    <a onClick={this.editAction}> Edit </a>
+	    
 	    </Col>
     </Row>
 	    </Grid>

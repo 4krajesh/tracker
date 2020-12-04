@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 
-import { DatePicker, SelectPicker, Panel, Button, Modal, Form, FormGroup, ControlLabel, FormControl, HelpBlock, Schema, RadioGroup, Radio, Notification} from 'rsuite';
-
-import { isAfter } from 'date-fns';
+import { 
+	Panel, 
+	Button, 
+	Modal, 
+	Form, FormGroup, ControlLabel, FormControl, HelpBlock, Schema, RadioGroup, Radio, Notification} from 'rsuite';
 
 import '../css/new.css';
 
@@ -34,20 +36,19 @@ class CustomField extends React.PureComponent {
 function open(funcName, msg) {
   Notification[funcName]({
     title: funcName,
-    description: <p style={{ width: "300px"}}>msg</p>
+    description: <p style={{ width: "300px"}}>{msg}</p>
   });
 }
 
 
-class NewTransaction extends Component {
+class EditTransaction extends Component {
 	constructor(props) {
     super(props);
 		this.state = {
       formValue: {
-	date: new Date(),
-        account: 'Eugenia',
-        amount: '',
-        type: 'Expense'
+        accountname: '',
+        currentbal: '',
+        accounttype: 'General'
       },
       show: false,
       formError: {}
@@ -58,10 +59,15 @@ class NewTransaction extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	  close() {
+		  console.log("testing");
     this.setState({ show: false });
   }
   open() {
-    this.setState({ show: true });
+    this.setState({ show:  true});
+  }
+  componentWillReceiveProps(nextProps) {
+  	if (nextProps.open)
+	  this.open();
   }
   handleChange(value) {
 	  console.log(value);
@@ -85,34 +91,15 @@ class NewTransaction extends Component {
         fetch('http://192.168.0.104:3001/createaccount', requestOptions)
         .then(response => response.json())
         .then(function(data){
-		open('error', data.msg);
+		open(data.status, data.msg);
         });
   }
 
 	render() {
 		const errorPlacement = 'bottomEnd'
 		const backdrop = true;
-		const data = [
-  {
-    "label": "Eugenia",
-    "value": "Eugenia",
-    "role": "Master"
-  },
-  {
-    "label": "Kariane",
-    "value": "Kariane",
-    "role": "Master"
-  }]
 		return (
 			<>
-<Panel className="button-card" shaded>
-	<header className="button-card-header">
-          <h2>Add Transaction</h2>
-        </header>
-	<div className="button-tags">
-          <button onClick={this.open}>click here</button>
-        </div>
-</Panel>
         <Modal backdrop={backdrop} show={this.state.show} onHide={this.close} size="xs">
 	        <Form
 	    ref={ref => (this.form = ref)}
@@ -124,42 +111,10 @@ class NewTransaction extends Component {
             formValue={this.state.formValue}
 	    model={model}>
           <Modal.Header>
-            <Modal.Title>New Transaction</Modal.Title>
+            <Modal.Title>Edit Transaction</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-	<CustomField
-            name="type"
-            label="Transaction Type"
-            accepter={RadioGroup}
-            inline
-	    appearance="picker"
-          >
-      <Radio value="Expense">Expense</Radio>
-      <Radio value="Earned">Earned</Radio>
-      <Radio value="Transfer">Transfer</Radio>
-          </CustomField>
-        <CustomField
-            name="account"
-            label="Select Account"
-            accepter={SelectPicker}
-	    data={data}
-            defaultValue={'Eugenia'}
-	    block
-          >
-          </CustomField>
-	  <CustomField
-            name="date"
-            label="Transaction Date"
-            placeholder="Transaction Date"
-	    disabledDate={date => isAfter(date, new Date())}
-            accepter={DatePicker}
-            block
-          >
-          </CustomField>
-    <FormGroup >
-      <ControlLabel>Transaction Amount</ControlLabel>
-      <FormControl name="amount" type="number" min={1} errorPlacement={errorPlacement}/>
-    </FormGroup>
+			ID: {this.props.id}
           </Modal.Body>
           <Modal.Footer>
             <Button type="submit" appearance="primary" onClick={this.handleSubmit}>
@@ -175,5 +130,5 @@ class NewTransaction extends Component {
                 );
         }
 }
-export default NewTransaction;
+export default EditTransaction;
 

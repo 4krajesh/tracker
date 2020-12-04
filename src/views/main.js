@@ -19,9 +19,6 @@ import { BsFillTerminalFill, BsWrench, BsFillHouseFill } from "react-icons/bs";
 import { FaChartPie } from "react-icons/fa";
 
 class Main extends Component {
-	  constructor(props) {
-    super(props);
-  }
   componentDidMount() {
 	  setTimeout(() => {
 	  document.body.style.transition = 'opacity .2s ease-in-out .2s';
@@ -45,7 +42,7 @@ class Main extends Component {
       <a href="#" className="navbar-brand">Tracker</a>
     </Navbar.Header>
         <Nav >
-	<Tag>Dashboard</Tag>
+	<Tag>Graphs</Tag>
           <Nav.Item href="/graphs" className="inner-1"><FaChartPie /></Nav.Item>
        </Nav>
       <Nav>

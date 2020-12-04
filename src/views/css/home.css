@@ -45,8 +45,14 @@ body {
 .fade-enter > .change {
   opacity: 0;
 }
+
+.fade-enter > .change-1 {
+  opacity: 0;
+  transform: translate(0, 100%);
+}
 .fade-enter-active > .change {
   opacity: 1;
+  transform: translateX(0%);
 }
 .fade-exit > .change {
   opacity: 1;
@@ -56,5 +62,5 @@ body {
 }
 .fade-enter-active > .change,
 .fade-exit-active > .change {
-  transition: opacity .6s;
+	transition: opacity .5s, transform .5s;
 }
