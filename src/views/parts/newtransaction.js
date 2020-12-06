@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
-import { DatePicker, SelectPicker, Panel, Button, Modal, Form, FormGroup, ControlLabel, FormControl, HelpBlock, Schema, RadioGroup, Radio, Notification} from 'rsuite';
+import { Tooltip, Whisper, DatePicker, SelectPicker, Panel, Button, Modal, Form, FormGroup, ControlLabel, FormControl, HelpBlock, Schema, RadioGroup, Radio, Notification} from 'rsuite';
+
+import { FcMoneyTransfer } from "react-icons/fc";
 
 import { isAfter } from 'date-fns';
 
@@ -105,14 +107,9 @@ class NewTransaction extends Component {
   }]
 		return (
 			<>
-<Panel className="button-card" shaded>
-	<header className="button-card-header">
-          <h2>Add Transaction</h2>
-        </header>
-	<div className="button-tags">
-          <button onClick={this.open}>click here</button>
-        </div>
-</Panel>
+			               <Whisper placement="top" trigger="hover" speaker={<Tooltip>New Transaction</Tooltip>}>
+              <Button onClick={this.open}> <FcMoneyTransfer/> </Button>
+               </Whisper>
         <Modal backdrop={backdrop} show={this.state.show} onHide={this.close} size="xs">
 	        <Form
 	    ref={ref => (this.form = ref)}

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { BsChevronDoubleRight, BsCreditCard,  BsStarHalf, BsTrashFill } from "react-icons/bs";
+import { BsChevronDoubleRight, BsCreditCard,  BsLock, BsTrashFill } from "react-icons/bs";
 import { FcMoneyTransfer } from "react-icons/fc";
 import { FaAngleDoubleRight } from "react-icons/fa";
 
@@ -229,12 +229,12 @@ class Home extends Component {
         <header className="account-card-header">
           {account.default ? (
             <p>
-              <BsStarHalf /> {account.id}
+              <BsLock /> ID: {account.id}
             </p>
           ) : (
 		  <>
 	    <Button className="account-delete-button" onClick={() => deleteAccount(account.id)}><BsTrashFill/></Button>
-            <p>{account.id}</p>
+            <p>ID: {account.id}</p>
 		  </>
           )}
           <h2>{account.name}</h2>
@@ -255,7 +255,7 @@ class Home extends Component {
             ) : (<></>)
             }
             { account.bank ? ( <>
-                          <p>Bank</p>
+                          <p>Provider</p>
                           <h6>{account.bank}</h6> </>
 	) : (<></>)
             }
@@ -284,69 +284,12 @@ class Home extends Component {
           <Row className="show-grid">
             <Col>
 	    <div className="adder">
-	       <Whisper placement="top" trigger="hover" speaker={
-  <Tooltip>
-    New Account
-  </Tooltip>}>
-	       <Button > <BsCreditCard/> </Button>
-    	       </Whisper>
-	       <Whisper placement="top" trigger="hover" speaker={<Tooltip>New Transaction</Tooltip>}>
-	      <Button > <FcMoneyTransfer/> </Button>
-    	       </Whisper>
+	    <NewAccount/>
+	    <NewTransaction/>
 	      <Button className="animate"> <FaAngleDoubleRight/> </Button>
 	    </div>
               <div className="account-card-list">{accountItems}</div>
             </Col>
-          </Row>
-          <Row className="show-grid account-details">
-            <SwitchTransition mode="out-in">
-              <CSSTransition
-                key={changeDetails}
-                addEndListener={(node, done) => {
-                  node.addEventListener("transitionend", done, false);
-                }}
-                classNames="fade"
-              >
-                <Col style={{ display: "flex" }}>
-                  <Panel
-                    header={this.state.current.name}
-                    shaded
-                    className="details change"
-                  >
-                    <div>
-                      <div className="elements">
-                        <div className="element">
-                          <p>ID</p>
-                          <h6>{this.state.current.id}</h6>
-                        </div>
-                        <div className="element">
-                          <p>Balance</p>
-                          <h6>{this.state.current.balance}</h6>
-                        </div>
-                        <div className="element">
-                          <p>Type</p>
-                          <h6>{this.state.current.type}</h6>
-                        </div>
-	    { this.state.current.type === 'Credit' ? (
-                        <div className="element">
-                          <p>Limit</p>
-                          <h6>{this.state.current.limit}</h6>
-                        </div>) : (<></>)
-	    }
-	    { ['Credit', 'Savings', 'Current'].includes(this.state.current.type) ? (
-                        <div className="element">
-                          <p>Bank</p>
-                          <h6>{this.state.current.bank}</h6>
-                        </div>) : (<></>)
-            }
-                      </div>
-                    </div>
-                  </Panel>
-                  <NewAccount />
-                  <NewTransaction />
-                </Col>
-              </CSSTransition>
-            </SwitchTransition>
           </Row>
           <Row className="show-grid">
             <SwitchTransition mode="out-in">

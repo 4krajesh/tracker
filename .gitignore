@@ -5,6 +5,8 @@
 /.pnp
 .pnp.js
 
+/server/tracker_server.egg-info
+
 # testing
 /coverage
 

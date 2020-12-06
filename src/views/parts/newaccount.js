@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 
+import { BsCreditCard} from "react-icons/bs";
+
+
 import { 
+	Whisper,
+	Tooltip,
 	SelectPicker,
 	Panel, 
 	Button, 
@@ -106,14 +111,13 @@ class NewAccount extends Component {
   }]
 		return (
 			<>
-<Panel className="button-card" shaded>
-	<header className="button-card-header">
-          <h2>Add Account</h2>
-        </header>
-	<div className="button-tags">
-          <button onClick={this.open}>click here</button>
-        </div>
-</Panel>
+			               <Whisper placement="top" trigger="hover" speaker={
+  <Tooltip>
+    New Account
+  </Tooltip>}>
+               <Button onClick={this.open}> <BsCreditCard/> </Button>
+               </Whisper>
+
         <Modal backdrop={backdrop} show={this.state.show} onHide={this.close} size="xs">
 	        <Form
 	    ref={ref => (this.form = ref)}
