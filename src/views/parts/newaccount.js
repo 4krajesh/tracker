@@ -32,7 +32,8 @@ class CustomField extends React.PureComponent {
           errorMessage={error}
           {...props}
         />
-        <HelpBlock>{message}</HelpBlock>
+	{ message ? (
+        <HelpBlock tooltip>{message}</HelpBlock>) : (<></>)}
       </FormGroup>
     );
   }
@@ -52,7 +53,7 @@ class NewAccount extends Component {
     super(props);
 		this.state = {
       formValue: {
-	bankname: 'Kotak',
+	provider: 'Kotak',
         accountname: '',
         currentbal: '',
         accounttype: 'General'
@@ -100,7 +101,7 @@ class NewAccount extends Component {
 	render() {
 		const errorPlacement = 'bottomEnd'
 		const backdrop = true;
-		const banks = [
+		const providers = [
   {
     "label": "Kotak",
     "value": "Kotak",
@@ -141,10 +142,11 @@ class NewAccount extends Component {
       <FormControl name="currentbal" type="number" min={1} errorPlacement={errorPlacement}/>
     </FormGroup>
           <CustomField
-            name="bankname"
-            label="Bank Name"
+            name="provider"
+            label="Provider Name"
             accepter={SelectPicker}
-	    data={banks}
+	    data={providers}
+	    message={"If your provider is not available, please go to settings and add the provider."}
             block
           >
           </CustomField>

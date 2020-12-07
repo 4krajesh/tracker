@@ -23,8 +23,6 @@ a:focus {
 }
 .rs-navbar:hover {
 	transform: translateY(25px);
-	color: #333;
-	background: aqua;
 }
 
 .rs-navbar-nav .rs-nav-item > .rs-nav-item-content{

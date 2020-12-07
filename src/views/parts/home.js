@@ -18,34 +18,6 @@ import { SwitchTransition, CSSTransition } from "react-transition-group";
 const { Column, HeaderCell, Cell, Pagination } = Table;
 
 
-function deleteAccount(id) {
-  Notification.warning({
-    title: 'Account Delete',
-    duration: 10000,
-    description: (
-      <div>
-        <p>Are you sure you want to delete account with id: {id}?</p>
-	    <ButtonToolbar>
-          <Button
-            onClick={() => {
-              Notification.close();
-            }}
-          >
-            Accept
-          </Button>
-          <Button
-            onClick={() => {
-              Notification.close();
-            }}
-          >
-            Cancel
-          </Button>
-	    </ButtonToolbar>
-      </div>
-    )
-  });
-}
-
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -66,7 +38,37 @@ class Home extends Component {
     this.handleChangePage = this.handleChangePage.bind(this);
     this.handleChangeLength = this.handleChangeLength.bind(this);
     this.handleAction = this.handleAction.bind(this);
+    this.deleteAccount = this.deleteAccount.bind(this);
   }
+
+deleteAccount(id) {
+	const { accounts } = this.state;
+  Notification.warning({
+    title: 'Account Delete',
+    duration: 10000,
+    description: (
+      <div>
+        <p>Are you sure you want to delete account with id: {id}?</p>
+            <ButtonToolbar>
+          <Button
+            onClick={() => { 
+		    Notification.close();
+		    this.setState({accounts: accounts.filter(account => account.id != id)}); }}
+          >
+            Accept
+          </Button>
+          <Button
+            onClick={() => {
+              Notification.close();
+            }}
+          >
+            Cancel
+          </Button>
+            </ButtonToolbar>
+      </div>
+    )
+  });
+}
 
   handleAction(action, id) {
     console.log(action, id);
@@ -229,12 +231,12 @@ class Home extends Component {
         <header className="account-card-header">
           {account.default ? (
             <p>
-              <BsLock /> ID: {account.id}
+              <BsLock /> ID {account.id}
             </p>
           ) : (
 		  <>
-	    <Button className="account-delete-button" onClick={() => deleteAccount(account.id)}><BsTrashFill/></Button>
-            <p>ID: {account.id}</p>
+	    <Button className="account-delete-button" onClick={() => this.deleteAccount(account.id)}><BsTrashFill/></Button>
+            <p>ID {account.id}</p>
 		  </>
           )}
           <h2>{account.name}</h2>
@@ -242,13 +244,13 @@ class Home extends Component {
 	<div className="account-body">
 	    <Grid>
 	    <Row className="show-grid">
-	    <Col xs={2}>
+	    <Col xs={12} md={2}>
 	    <p>Balance</p>
 	    <h6>{account.balance}</h6>
 	    <p>Type</p>
 	    <h6>{account.type}</h6>
 	    </Col>
-	    <Col xs={2}>
+	    <Col xs={12} md={2}>
             { account.limit ? ( <>
 		    <p>Credit Limit</p>
 	    	    <h6>{account.limit}</h6> </>

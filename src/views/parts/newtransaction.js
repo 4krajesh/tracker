@@ -132,7 +132,7 @@ class NewTransaction extends Component {
 	    appearance="picker"
           >
       <Radio value="Expense">Expense</Radio>
-      <Radio value="Earned">Earned</Radio>
+      <Radio value="Income">Income</Radio>
       <Radio value="Transfer">Transfer</Radio>
           </CustomField>
         <CustomField

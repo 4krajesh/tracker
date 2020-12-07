@@ -26,8 +26,9 @@ a {
     box-shadow: -.5rem 0 .5rem #262626;
     padding: 0.5rem;
     */
+    color: #333;
     border-radius: 16px;
-    background: #fff;
+    background: #F9F9F9;
     height: 300px;
     width: 250px;
     min-width: 250px;
@@ -67,7 +68,7 @@ a {
     right: -2px;
     border-radius: 0px 0px 0px 30px;
     background: transparent;
-    color: #fff;
+    color: #F9F9F9;
 }
 
 
@@ -76,7 +77,7 @@ a {
 	background: transparent;
 }
 .account-card:hover~.account-card {
-    transform: translateX(130px);
+    transform: translateX(110px);
 }
 
 .account-card:hover {

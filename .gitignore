@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+
+# server
+*.pyc
 /server/tracker_server.egg-info
 
 # testing
