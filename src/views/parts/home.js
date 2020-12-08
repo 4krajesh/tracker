@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 
-import { BsChevronDoubleRight, BsCreditCard,  BsLock, BsTrashFill } from "react-icons/bs";
-import { FcMoneyTransfer } from "react-icons/fc";
+import { BsLock, BsTrashFill } from "react-icons/bs";
 import { FaAngleDoubleRight } from "react-icons/fa";
 
 
-import { Tooltip, Whisper, ButtonToolbar, Notification, Button, Table, Grid, Panel, Row, Col } from "rsuite";
+import {  ButtonToolbar, Notification, Button, Table, Grid, Panel, Row, Col } from "rsuite";
 
 import "../css/home.css";
 import "../css/accounts.css";
@@ -53,7 +52,7 @@ deleteAccount(id) {
           <Button
             onClick={() => { 
 		    Notification.close();
-		    this.setState({accounts: accounts.filter(account => account.id != id)}); }}
+		    this.setState({accounts: accounts.filter(account => account.id !== id)}); }}
           >
             Accept
           </Button>
