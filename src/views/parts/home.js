@@ -17,7 +17,7 @@ import { DOMHelper } from 'rsuite';
 import { SwitchTransition, CSSTransition } from "react-transition-group";
 const { Column, HeaderCell, Cell, Pagination } = Table;
 
-const { toggleClass, getOffsetParent } = DOMHelper;
+const { removeClass, toggleClass, getOffsetParent } = DOMHelper;
 
 
 class Home extends Component {
@@ -187,7 +187,11 @@ deleteAccount(id) {
     }, 500);
   }
 
-  accountDetails(id) {
+    accountRefs = [];
+    setRef = (ref) => {
+      this.accountRefs.push(ref);
+    };
+  accountDetails(id, index) {
 	  console.log("here");
         const account = this.state.accounts.filter(
             (account) => account.id === id
@@ -195,17 +199,13 @@ deleteAccount(id) {
 
         this.setState({ current: account[0] });
         this.setState({ changeDetails: !this.state.changeDetails });
-	console.log(this.focusInput);
+	for (var x in this.accountRefs) {
+		removeClass(getOffsetParent(this.accountRefs[x]), 'active');
+	}
+	toggleClass(getOffsetParent(this.accountRefs[index]), 'active');
   }
 
-    accountRefs = [];
-    setRef = (ref) => {
-      this.accountRefs.push(ref);
-    };
-   focusInput = (id) => {
-	   console.log(id)
-	   toggleClass(this.accountRefs[id], 'custom');
-   }
+
    render() {
     const items = [];
     for (const [index, value] of this.state.transactions.entries()) {
@@ -237,8 +237,8 @@ deleteAccount(id) {
     }
 
     var accountItems = this.state.accounts.map((account, index) => (
-      <Panel shaded className="account-card" key={index} ref={this.setRef}>
-        <header className="account-card-header" >
+      <Panel shaded className="account-card" key={index} >
+        <header className="account-card-header" ref={this.setRef}>
           {account.default ? (
             <p>
               <BsLock /> ID {account.id}
@@ -276,7 +276,7 @@ deleteAccount(id) {
 	    </Grid>
 	</div>
         <div className="account-tags">
-          <Button onClick={() => this.accountDetails(account.id)} id={index}>
+          <Button onClick={() => this.accountDetails(account.id, index)}>
             view
           </Button>
           {account.default ? (

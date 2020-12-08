@@ -41,6 +41,17 @@ a {
     position: relative;
 }
 
+.active {
+	transform: translate(0, -1rem);
+	background-color: #A9C9FF;
+background-image: linear-gradient(180deg, #A9C9FF 0%, #FFBBEC 100%);
+
+}
+
+.active > .rs-panel-body > .account-card-header p {
+	color: cyan;
+}
+
 .account-body {
 	color: transparent;
 	height: 100px;
@@ -51,7 +62,7 @@ a {
 .account-card:hover .account-body p {
 	    line-height: 20px;
 	font-size: 12px;
-	color: #7a7a8c;
+	color: cyan;
 }
 
 .account-card:hover .account-body {
@@ -160,5 +171,5 @@ a {
     -webkit-background-clip: text;
     -webkit-box-decoration-break: clone;
     background-clip: text;
-    border-color: skyblue;
+    border-color: salmon;
 }
