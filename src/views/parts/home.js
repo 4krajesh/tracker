@@ -237,7 +237,7 @@ deleteAccount(id) {
     }
 
     var accountItems = this.state.accounts.map((account, index) => (
-      <Panel shaded className="account-card" key={index} >
+      <Panel shaded className={account.id === 'all' ? "account-card active" : "account-card"} key={index} >
         <header className="account-card-header" ref={this.setRef}>
           {account.default ? (
             <p>
