@@ -25,15 +25,20 @@ def random_date():
 
 def generate_accounts():
     tot = 0
-    banks = ['Citi', 'Kotak', 'SBI', 'Paytm']
+    account_names = []
+    providers = ['Citi', 'Kotak', 'SBI', 'Paytm']
     types = ['Credit', 'Savings', 'Current', 'E-Wallet']
     accounts = [{ "name": "All Accounts", "balance": "0", "id": "all", "type": 'All', "default": True },
                 { "name": "Wallet", "type": "Cash", "balance": random.randint(100,1000), "id": "wallet", "default": True}]
-    for i in range(0,random.randint(5,6)):
+    for i in range(0,random.randint(5,10)):
+        account_names.append(random.choice(NAMES))
+    account_names = set(account_names)
+    print(account_names)
+    for i in account_names:
         ty = random.choice(types)
         id = random.randint(100000,1000000)
         balance = random.randint(1000,100000)
-        acc = {"name": random.choice(NAMES), "balance": balance, "id": id, "default": False, "type": random.choice(types), "bank": random.choice(banks)}
+        acc = {"name": random.choice(NAMES), "balance": balance, "id": id, "default": False, "type": random.choice(types), "provider": random.choice(providers)}
         if ty == 'Credit':
             acc['limit'] = balance + random.randint(10000,100000)
         tot = tot + balance
@@ -42,17 +47,23 @@ def generate_accounts():
     print(accounts)
     return accounts
 
-def generate_transactions():
+def generate_transactions(accounts):
     trans = []
-    no_of_trans = random.randint(5,100)
-    for i in range(0,no_of_trans):
-        trans.append({"id": uuid.uuid1(), "created_at": random_date(), "value": random.randint(100,100000)})
+    for account in accounts:
+        if account['id'] == 'all':
+            continue
+        no_of_trans = random.randint(5,30)
+        print(account['name'], no_of_trans)
+        for i in range(0,no_of_trans):
+            trans.append({"id": uuid.uuid1(), "created_at": random_date(), "value": random.randint(100,100000), "account": account['name']})
+    print(len(trans))
     return trans
 
 @app.route('/accounts')
 def accounts():
-    return { "accounts": generate_accounts(),
-            "transactions": generate_transactions()
+    accounts = generate_accounts()
+    return { "accounts": accounts,
+            "transactions": generate_transactions(accounts)
     }
 
 

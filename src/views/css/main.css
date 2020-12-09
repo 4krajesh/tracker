@@ -1,97 +1,106 @@
+.loaded {
+  transition: opacity .2s ease-in-out .2s;
+  opacity: 1;
+}
+
 a:focus {
-	text-decoration: none;
+  text-decoration: none;
 }
 
-.rs-navbar.rs-navbar-default { 
-	color: #fff;
-	background: lightskyblue;
+.rs-navbar.rs-navbar-default {
+  color: #fff;
+  background: lightskyblue;
 }
 
-.rs-navbar { 
-    margin-top: -25px;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.12), 0 0 10px rgba(0, 0, 0, 0.06);
-    border-bottom-left-radius: 45%;
-    border-bottom-right-radius: 45%;
-    text-align: center;
-    transition: .5s;
-    overflow: hidden;
+.rs-navbar {
+  margin-top: -25px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.12), 0 0 10px rgba(0, 0, 0, 0.06);
+  border-bottom-left-radius: 45%;
+  border-bottom-right-radius: 45%;
+  text-align: center;
+  transition: .5s;
+  overflow: hidden;
 }
 
 .rs-navbar-body {
-	justify-content: space-around;
-	display: flex;
+  justify-content: space-around;
+  display: flex;
 }
+
 .rs-navbar:hover {
-	transform: translateY(25px);
+  transform: translateY(25px);
 }
 
-.rs-navbar-nav .rs-nav-item > .rs-nav-item-content{
-    transition: .2s;
-	font-size: 16px;
-	height: 65px;
-	width: 65px;
-	padding: 0;
-  	display: flex;
-  	justify-content: center;
-  	align-items: center;
+.rs-navbar-nav .rs-nav-item>.rs-nav-item-content {
+  transition: .2s;
+  font-size: 16px;
+  height: 65px;
+  width: 65px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.rs-nav.rs-nav-horizontal .rs-dropdown, .rs-nav.rs-nav-horizontal .rs-nav-item {
-	display: flex;
-    vertical-align: top;
-    justify-content: center;
+.rs-nav.rs-nav-horizontal .rs-dropdown,
+.rs-nav.rs-nav-horizontal .rs-nav-item {
+  display: flex;
+  vertical-align: top;
+  justify-content: center;
 }
-.rs-nav-default .rs-nav-item:not(.rs-nav-item-active):not(.rs-nav-item-disabled) > .rs-nav-item-content:hover,
-.rs-nav-default .rs-nav-item:not(.rs-nav-item-active):not(.rs-nav-item-disabled) > .rs-nav-item-content:focus,
-.rs-nav-default .rs-nav-item:not(.rs-nav-item-active):not(.rs-nav-item-disabled) > .rs-nav-item-content:active{
-	background: lightsalmon;
-	font-size: 22px;
+
+.rs-nav-default .rs-nav-item:not(.rs-nav-item-active):not(.rs-nav-item-disabled)>.rs-nav-item-content:hover,
+.rs-nav-default .rs-nav-item:not(.rs-nav-item-active):not(.rs-nav-item-disabled)>.rs-nav-item-content:focus,
+.rs-nav-default .rs-nav-item:not(.rs-nav-item-active):not(.rs-nav-item-disabled)>.rs-nav-item-content:active {
+  background: lightsalmon;
+  font-size: 22px;
 }
-.rs-nav-default .rs-nav-item:not(.rs-nav-item-active):not(.rs-nav-item-disabled) > .rs-nav-item-content {
+
+.rs-nav-default .rs-nav-item:not(.rs-nav-item-active):not(.rs-nav-item-disabled)>.rs-nav-item-content {
   border-radius: 50%;
 
 }
 
 .rs-nav.rs-nav-horizontal .rs-nav-item.inner-1 {
-	margin-top: 14px;
-	display: flex;
-    justify-content: center;
-    align-items: center;
-    vertical-align: middle;
+  margin-top: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
 }
 
 .rs-navbar-header {
-	    margin-top: 40px;
-	height: 65px;
-    width: 100px;
-    justify-content: center;
-    display: flex;
+  margin-top: 40px;
+  height: 65px;
+  width: 100px;
+  justify-content: center;
+  display: flex;
 }
 
 .navbar-brand {
-    transition: .5s;
-    padding: 13px;
-    font-size: 30px;
-    font-weight: bold;
+  transition: .5s;
+  padding: 13px;
+  font-size: 30px;
+  font-weight: bold;
 }
 
 .rs-navbar-header a:hover {
-    font-size: 32px;
- 	    background: linear-gradient(90deg, #FDBB2D 0%, #3A1C71 100%);
-	    text-shadow: none;
-	    -webkit-text-fill-color: transparent;
-	    -webkit-background-clip: text;
-	    background-clip: text;
-	    text-decoration: none;
+  font-size: 32px;
+  background: linear-gradient(90deg, #FDBB2D 0%, #3A1C71 100%);
+  text-shadow: none;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-decoration: none;
 }
 
-.rs-nav > ul {
-    display: grid;
+.rs-nav>ul {
+  display: grid;
 }
 
 .rs-tag {
-	padding: 0px;
-	font-size: 14px;
-	font-weight: bold;
-	background-color: transparent;
+  padding: 0px;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: transparent;
 }

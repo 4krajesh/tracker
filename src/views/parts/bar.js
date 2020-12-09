@@ -30,6 +30,11 @@ const options = {
   },
 };
 
+function randomColor() { 
+	var color = Chart.helpers.color;
+	return color( "#" + Math.floor(Math.random()*16777215).toString(16)).alpha(0.3).rgbString(); 
+}
+
 export default class BarChart extends React.Component {
   constructor(props) {
     super(props);
@@ -46,10 +51,10 @@ export default class BarChart extends React.Component {
         datasets: [
           {
             label: "Rainfall",
-            backgroundColor: color("red").alpha(0.3).rgbString(),
+            backgroundColor: [randomColor(), randomColor(), randomColor(), randomColor(), randomColor()],
             borderColor: "rgba(0,0,0,1)",
             borderWidth: 2,
-            data: [65, 59, 80, 81, 56],
+            data: [Math.floor(Math.random() * 100),Math.floor(Math.random() * 100),Math.floor(Math.random() * 100),Math.floor(Math.random() * 100),Math.floor(Math.random() * 100)],
           },
         ],
       },

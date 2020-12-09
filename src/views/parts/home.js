@@ -17,7 +17,7 @@ import { DOMHelper } from 'rsuite';
 import { SwitchTransition, CSSTransition } from "react-transition-group";
 const { Column, HeaderCell, Cell, Pagination } = Table;
 
-const { removeClass, toggleClass, getOffsetParent } = DOMHelper;
+const { removeClass, hasClass, toggleClass, getOffsetParent } = DOMHelper;
 
 
 class Home extends Component {
@@ -32,6 +32,7 @@ class Home extends Component {
       addColumn: false,
       page: 1,
       displayLength: 10,
+      length: 0,
       sortColumn: "created_at",
       sortType: "desc",
       edit: false,
@@ -41,20 +42,26 @@ class Home extends Component {
     this.handleChangeLength = this.handleChangeLength.bind(this);
     this.handleAction = this.handleAction.bind(this);
     this.deleteAccount = this.deleteAccount.bind(this);
+    this.checkLength = this.checkLength.bind(this);
   }
 
-deleteAccount(id) {
-	const { accounts } = this.state;
+deleteAccount(id, index) {
+  const { accounts } = this.state;
   Notification.warning({
-    title: 'Account Delete',
+    title: 'Account Delete - ID ' + id,
     duration: 10000,
     description: (
       <div>
-        <p>Are you sure you want to delete account with id: {id}?</p>
+        <p>Are you sure?</p>
+        <p>All transactions related to the account will be deleted.</p>
+	    <br/>
             <ButtonToolbar>
           <Button
             onClick={() => { 
 		    Notification.close();
+		    if (hasClass(getOffsetParent(this.accountRefs[index]), 'active')) {
+			    this.accountDetails('all', 0);
+		    }
 		    this.setState({accounts: accounts.filter(account => account.id !== id)}); }}
           >
             Accept
@@ -73,14 +80,12 @@ deleteAccount(id) {
 }
 
   handleAction(action, id) {
-    console.log(action, id);
     if (action === "edit") {
       this.setState({ edit: true, editTransId: id });
 	    setTimeout(() => {
       this.setState({edit: false });
     }, 100);
     }
-	  console.log("here");
   }
 
   setDefaultVal(value, defaultValue) {
@@ -122,6 +127,15 @@ deleteAccount(id) {
     });
   }
 
+  checkLength() {
+    const { transactions, current } = this.state;
+    if (current.id !== 'all')
+            return transactions.filter((v, i) => {
+                    return v.account === current.name
+            }).length;
+    return transactions.length
+  }
+
   handleChangeLength(dataKey) {
     this.setState({
       page: 1,
@@ -136,10 +150,12 @@ deleteAccount(id) {
       sortType,
       page,
       displayLength,
+      current,
     } = this.state;
+    let sorted = [];
 
     if (sortColumn && sortType) {
-      return transactions
+      sorted = transactions
         .sort((a, b) => {
           let x = a[sortColumn];
           let y = b[sortColumn];
@@ -159,21 +175,20 @@ deleteAccount(id) {
             return y - x;
           }
         })
-        .filter((v, i) => {
+    }
+	if (current.id !== 'all')
+	    sorted = sorted.filter((v, i) => { 
+		    return v.account === current.name 
+	    });
+
+        return sorted.filter((v, i) => {
           const start = displayLength * (page - 1);
           const end = start + displayLength;
           return i >= start && i < end;
         });
-    }
-    return transactions.filter((v, i) => {
-      const start = displayLength * (page - 1);
-      const end = start + displayLength;
-      return i >= start && i < end;
-    });
   }
 
   handleSortColumn(sortColumn, sortType) {
-    console.log(sortColumn, sortType);
     this.setState({
       loading: true,
     });
@@ -187,14 +202,15 @@ deleteAccount(id) {
     }, 500);
   }
 
-    accountRefs = [];
-    setRef = (ref) => {
+  accountRefs = [];
+
+  setRef = (ref) => {
       this.accountRefs.push(ref);
-    };
+  };
+
   accountDetails(id, index) {
-	  console.log("here");
         const account = this.state.accounts.filter(
-            (account) => account.id === id
+            (account, index) => account.id === id
         );
 
         this.setState({ current: account[0] });
@@ -245,7 +261,7 @@ deleteAccount(id) {
             </p>
           ) : (
 		  <>
-	    <Button className="account-delete-button" onClick={() => this.deleteAccount(account.id)}><BsTrashFill/></Button>
+	    <Button className="account-delete-button" onClick={() => this.deleteAccount(account.id, index)}><BsTrashFill/></Button>
             <p>ID {account.id}</p>
 		  </>
           )}
@@ -266,9 +282,9 @@ deleteAccount(id) {
 	    	    <h6>{account.limit}</h6> </>
             ) : (<></>)
             }
-            { account.bank ? ( <>
+            { account.provider ? ( <>
                           <p>Provider</p>
-                          <h6>{account.bank}</h6> </>
+                          <h6>{account.provider}</h6> </>
 	) : (<></>)
             }
 	    </Col>
@@ -303,8 +319,8 @@ deleteAccount(id) {
               <div className="account-card-list">{accountItems}</div>
             </Col>
           </Row>
-          <Row className="show-grid">
-            <SwitchTransition mode="out-in">
+	    </Grid>
+	                          <SwitchTransition mode="out-in">
               <CSSTransition
                 key={changeDetails}
                 addEndListener={(node, done) => {
@@ -312,12 +328,27 @@ deleteAccount(id) {
                 }}
                 classNames="fade"
               >
-                <Col>
+        <Grid fluid>
+	      <Row className="show-grid slots change">
+      <Col xs={24} sm={24} md={8}>
+	      <Panel header="Expense" className="slot" shaded>
+  </Panel>
+      </Col>
+      <Col xs={24} sm={24} md={8}>
+	      <Panel header="Income" className="slot" shaded>
+  </Panel>
+      </Col>
+      <Col xs={24} sm={24} md={8}>
+	      <Panel header="Transfer" className="slot" shaded>
+  </Panel>
+      </Col>
+    </Row>
+          <Row className="show-grid change change-1">
+                <Col >
                   <Panel
                     header="Transactions"
                     shaded
                     style={{ margin: "10px", borderRadius: "16px" }}
-                    className="change change-1"
                     bodyFill
                   >
                     <EditTransaction
@@ -349,6 +380,11 @@ deleteAccount(id) {
                       <Column width={200} sortable>
                         <HeaderCell>Value</HeaderCell>
                         <Cell dataKey="value" />
+                      </Column>
+                      
+	    	      <Column width={200} sortable>
+                        <HeaderCell>Account Name</HeaderCell>
+                        <Cell dataKey="account" />
                       </Column>
 
                       <Column width={120}>
@@ -391,19 +427,27 @@ deleteAccount(id) {
                           value: 20,
                           label: 20,
                         },
+			{
+                          value: 50,
+                          label: 50,
+                        },
+                        {
+                          value: 100,
+                          label: 100,
+                        },
                       ]}
                       activePage={page}
                       displayLength={displayLength}
-                      total={this.state.transactions.length}
+                      total={this.checkLength()}
                       onChangePage={this.handleChangePage}
                       onChangeLength={this.handleChangeLength}
                     />
                   </Panel>
                 </Col>
-              </CSSTransition>
-            </SwitchTransition>
           </Row>
         </Grid>
+              </CSSTransition>
+            </SwitchTransition>
       </div>
     );
   }
