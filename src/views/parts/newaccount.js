@@ -174,10 +174,10 @@ class NewAccount extends Component {
                 label="Provider Name"
                 accepter={SelectPicker}
                 data={providers}
-                message={
-                  "If your provider is not available, please go to settings and add the provider."
-                }
-                block
+	        block
+		message={
+		  "If your provider is not available, please go to settings and add the provider."
+		}
               ></CustomField>
 
               <CustomField

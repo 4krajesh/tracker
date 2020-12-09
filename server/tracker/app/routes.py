@@ -30,15 +30,15 @@ def generate_accounts():
     types = ['Credit', 'Savings', 'Current', 'E-Wallet']
     accounts = [{ "name": "All Accounts", "balance": "0", "id": "all", "type": 'All', "default": True },
                 { "name": "Wallet", "type": "Cash", "balance": random.randint(100,1000), "id": "wallet", "default": True}]
-    for i in range(0,random.randint(5,10)):
+    for i in range(0,random.randint(5,100)):
         account_names.append(random.choice(NAMES))
     account_names = set(account_names)
     print(account_names)
-    for i in account_names:
+    for account in account_names:
         ty = random.choice(types)
         id = random.randint(100000,1000000)
         balance = random.randint(1000,100000)
-        acc = {"name": random.choice(NAMES), "balance": balance, "id": id, "default": False, "type": random.choice(types), "provider": random.choice(providers)}
+        acc = {"name": account, "balance": balance, "id": id, "default": False, "type": random.choice(types), "provider": random.choice(providers)}
         if ty == 'Credit':
             acc['limit'] = balance + random.randint(10000,100000)
         tot = tot + balance
