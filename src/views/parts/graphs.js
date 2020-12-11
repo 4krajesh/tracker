@@ -14,14 +14,6 @@ export default class Graphs extends React.Component {
           <Row className="show-grid">
             <h1>Graphs</h1>
           </Row>
-          <Row className="show-grid">
-            <Col xs={24} sm={24} md={12}>
-              <BarChart />
-            </Col>
-            <Col xs={24} sm={24} md={12}>
-              <BarChart />
-            </Col>
-          </Row>
 	    <Row className="show-grid">
 	    <SalaryChart /> 
 	    </Row>
