@@ -111,6 +111,15 @@ deleteAccount(id, index) {
         // instead of a catch() block so that we don't swallow
         // exceptions from actual bugs in components.
         (error) => {
+		Notification.error({
+    title: 'Error',
+    description:(
+            <>
+                <p>Unable to retrive accounts data.</p>
+                <p>Please verify if your server API is working.</p>
+            </>
+                  )
+  });
           this.setState({
             error,
           });

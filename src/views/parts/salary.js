@@ -1,7 +1,7 @@
 import React from "react";
 import Chart from "chart.js";
 
-import { Panel, Button, RadioGroup, Radio } from "rsuite";
+import { Panel, Button, RadioGroup, Radio, Notification } from "rsuite";
 import { Grid, Row, Col } from 'rsuite';
 
 
@@ -71,15 +71,18 @@ export default class SalaryChart extends React.Component {
 
 
  componentDidUpdate() {
+    if(this.state.details) {
     this.mySalaryDoughnut.data.datasets = this.getDoughnutDataSets(this.state.details);
     this.mySalaryChart.data.labels = this.state.details[this.state.year]['labels'];
     this.mySalaryChart.data.datasets = this.getChartDataSets(this.state.details);
     this.mySalaryChart.update();
     this.mySalaryDoughnut.update();
+    }
   }
 
   getDoughnutDataSets(data) {
 	  const { year } = this.state;
+	  if(data){
 	  return [{
                                         data: [
                                                 data[year]['total']['gross'],
@@ -102,6 +105,7 @@ export default class SalaryChart extends React.Component {
                                         ],
                                         label: ['Net + Deductions']
                                 }]
+	  }
   }
   getChartDataSets(data) {
 	return [{               label: 'Gross Pay',
@@ -123,6 +127,7 @@ export default class SalaryChart extends React.Component {
       .then((res) => res.json())
       .then(
         (result) => {
+		console.log(result);
 		this.setState({ details: result,
 			years: Object.keys(result),
 			labels: result[this.state.year]['labels'],
@@ -138,6 +143,15 @@ export default class SalaryChart extends React.Component {
 	  this.mySalaryDoughnut.update();
         },
         (error) => {
+		  Notification.error({
+    title: 'Error',
+    description:( 
+	    <>
+		<p>Unable to retrive salary data.</p>
+		<p>Please verify if your server API is working.</p>
+	    </>
+		  )
+  });
           this.setState({
             error,
           });
