@@ -26,7 +26,6 @@ export default class Test extends React.Component {
 	    </Row>
     <Row className="show-grid">
 	    <Col>
-	   <SalaryChart/> 
 	    </Col>
     </Row>
 	    </Grid>

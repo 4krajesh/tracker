@@ -2,42 +2,43 @@ import React from "react";
 import Chart from "chart.js";
 
 import { Panel, Button, RadioGroup, Radio, Notification } from "rsuite";
-import { Grid, Row, Col } from 'rsuite';
+import { Grid, Row, Col } from "rsuite";
 
-
-function randomColor() { 
-	var color = Chart.helpers.color;
-	return color( "#" + Math.floor(Math.random()*16777215).toString(16)).alpha(0.3).rgbString(); 
+function randomColor() {
+  var color = Chart.helpers.color;
+  return color("#" + Math.floor(Math.random() * 16777215).toString(16))
+    .alpha(0.3)
+    .rgbString();
 }
 
 function getColor(c) {
-	var color = Chart.helpers.color;
-        return color(c.toString(16)).alpha(0.3).rgbString();
-}
-
-function randomScalingFactor() {
-	return Math.floor(Math.random() * 100)
+  var color = Chart.helpers.color;
+  return color(c.toString(16)).alpha(0.3).rgbString();
 }
 
 export default class SalaryChart extends React.Component {
   constructor(props) {
     super(props);
-	  var d = new Date();
-	  this.state = { year: d.getFullYear().toString(), years: [], labels: [], datasets: []}
+    var d = new Date();
+    this.state = {
+      year: d.getFullYear().toString(),
+      years: [],
+      labels: [],
+      datasets: [],
+    };
     this.salaryChartRef = React.createRef();
     this.salaryYearChartRef = React.createRef();
     this.handleChange = this.handleChange.bind(this);
   }
 
-  
   drawSalaryChart() {
     this.mySalaryChart = new Chart(this.salaryChartRef.current, {
       type: "bar",
       options: {
-      responsive: true,
-	      tooltips: {
-            mode: 'index',
-	    intersect: false,
+        responsive: true,
+        tooltips: {
+          mode: "index",
+          intersect: false,
         },
         title: {
           display: false,
@@ -50,12 +51,11 @@ export default class SalaryChart extends React.Component {
         },
       },
     });
-   this.mySalaryDoughnut = new Chart(this.salaryYearChartRef.current, {
-   type: 'doughnut',
-   data: { labels: ['Gross','Net','Deductions'],
-   datasets: [{}]},
-	         options: {
-      responsive: true,
+    this.mySalaryDoughnut = new Chart(this.salaryYearChartRef.current, {
+      type: "doughnut",
+      data: { labels: ["Gross", "Net", "Deductions"], datasets: [{}] },
+      options: {
+        responsive: true,
         title: {
           display: false,
           text: "Salary Per Year",
@@ -63,63 +63,68 @@ export default class SalaryChart extends React.Component {
         },
         legend: {
           display: true,
-          position: "right",
+          position: "left",
         },
       },
-   }); 
+    });
   }
 
+  componentDidUpdate() {
+    const { details, year } = this.state;
 
- componentDidUpdate() {
-    if(this.state.details) {
-    this.mySalaryDoughnut.data.datasets = this.getDoughnutDataSets(this.state.details);
-    this.mySalaryChart.data.labels = this.state.details[this.state.year]['labels'];
-    this.mySalaryChart.data.datasets = this.getChartDataSets(this.state.details);
-    this.mySalaryChart.update();
-    this.mySalaryDoughnut.update();
+    if (details) {
+      this.mySalaryDoughnut.data.datasets = this.getDoughnutDataSets(details);
+      this.mySalaryChart.data.labels = this.state.details[year]["labels"];
+      this.mySalaryChart.data.datasets = this.getChartDataSets(details);
+      this.mySalaryChart.update();
+      this.mySalaryDoughnut.update();
     }
   }
 
   getDoughnutDataSets(data) {
-	  const { year } = this.state;
-	  if(data){
-	  return [{
-                                        data: [
-                                                data[year]['total']['gross'],
-                                                0,
-                                                0
-                                        ],
-                                        backgroundColor: [getColor('blue'), getColor('green'), getColor('red')],
-                                        label: 'Gross'},
+    const { year } = this.state;
+    const bgc = [getColor("blue"), getColor("green"), getColor("red")];
+    if (data) {
+      return [
+        {
+          data: [data[year]["total"]["gross"], 0, 0],
+          backgroundColor: bgc,
+          label: "Gross",
+        },
 
-                                {
-                                        data: [
-                                                0,
-                                                data[year]['total']['net'],
-                                                data[year]['total']['deductions'],
-                                        ],
-                                        backgroundColor: [
-                                                getColor('blue'),
-                                                getColor('green'),
-                                                getColor('red'),
-                                        ],
-                                        label: ['Net + Deductions']
-                                }]
-	  }
+        {
+          data: [
+            0,
+            data[year]["total"]["net"],
+            data[year]["total"]["deductions"],
+          ],
+          backgroundColor: bgc,
+          label: ["Net + Deductions"],
+        },
+      ];
+    }
   }
   getChartDataSets(data) {
-	return [{               label: 'Gross Pay',
-                                backgroundColor: getColor('blue'),
-                                data: data[this.state.year]['data']['gross']
-                        }, {    
-                                label: 'Net Pay',
-                                backgroundColor: getColor('green'),
-                                data: data[this.state.year]['data']['net']
-                        }, {    
-                                label: 'Deductions',
-                                backgroundColor: getColor('red'),
-                                data: data[this.state.year]['data']['deductions']
-                        }]
+    const { year } = this.state;
+    if (data) {
+      return [
+        {
+          label: "Gross Pay",
+          backgroundColor: getColor("blue"),
+          data: data[year]["data"]["gross"],
+        },
+        {
+          label: "Net Pay",
+          backgroundColor: getColor("green"),
+          data: data[year]["data"]["net"],
+        },
+        {
+          label: "Deductions",
+          backgroundColor: getColor("red"),
+          data: data[year]["data"]["deductions"],
+        },
+      ];
+    }
   }
   componentDidMount() {
     Chart.defaults.global.defaultFontFamily = "Quicksand";
@@ -127,31 +132,32 @@ export default class SalaryChart extends React.Component {
       .then((res) => res.json())
       .then(
         (result) => {
-		console.log(result);
-		this.setState({ details: result,
-			years: Object.keys(result),
-			labels: result[this.state.year]['labels'],
-                        datasets: this.getChartDataSets(result), 
-			doughnutsets: this.getDoughnutDataSets(result),
-                });
-	  
-	  this.mySalaryDoughnut.data.datasets = this.state.doughnutsets;
-		console.log(this.mySalaryChart.data.datasets);
-	  this.mySalaryChart.data.labels = this.state.labels;
-	  this.mySalaryChart.data.datasets = this.state.datasets;
-	  this.mySalaryChart.update();
-	  this.mySalaryDoughnut.update();
+          console.log(result);
+          this.setState({
+            details: result,
+            years: Object.keys(result),
+            labels: result[this.state.year]["labels"],
+            datasets: this.getChartDataSets(result),
+            doughnutsets: this.getDoughnutDataSets(result),
+          });
+
+          const { doughnutsets, labels, datasets } = this.state;
+          this.mySalaryDoughnut.data.datasets = doughnutsets;
+          this.mySalaryChart.data.labels = labels;
+          this.mySalaryChart.data.datasets = datasets;
+          this.mySalaryChart.update();
+          this.mySalaryDoughnut.update();
         },
         (error) => {
-		  Notification.error({
-    title: 'Error',
-    description:( 
-	    <>
-		<p>Unable to retrive salary data.</p>
-		<p>Please verify if your server API is working.</p>
-	    </>
-		  )
-  });
+          Notification.error({
+            title: "Error",
+            description: (
+              <>
+                <p>Unable to retrive salary data.</p>
+                <p>Please verify if your server API is working.</p>
+              </>
+            ),
+          });
           this.setState({
             error,
           });
@@ -160,40 +166,57 @@ export default class SalaryChart extends React.Component {
     this.drawSalaryChart();
   }
 
-  handleChange(value){
-	  this.setState({year: value});
+  handleChange(value) {
+    this.setState({ year: value });
   }
 
   render() {
-	  const years = this.state.years.map((year, index) =>
-      		<Radio value={year} key={index}>{year}</Radio>
-	  );
+    const { year } = this.state;
+    const years = this.state.years.map((year, index) => (
+      <Radio value={year} key={index}>
+        {year}
+      </Radio>
+    ));
+    const styles = {
+      radioGroup: {
+        position: "relative",
+        display: "flex",
+        justifyContent: "center",
+      },
+      panel: { margin: "10px", borderRadius: "16px", padding: "10px" },
+    };
     return (
       <div>
-    <RadioGroup name="radioList" inline appearance="picker" defaultValue={this.state.year} onChange={this.handleChange}>
-	    {years}
-    </RadioGroup>
-	    <Grid fluid><Row className="show-grid">
-	    <Col xs={24} sm={24} md={14} >
-        <Panel
-          header={"Salary Per Month - " + this.state.year}
-          shaded
-          style={{ margin: "10px", borderRadius: "16px"}}
-        >
-          <canvas ref={this.salaryChartRef} />
+        <Panel shaded style={styles.panel}>
+          <Grid fluid>
+            <Row className="show-grid">
+              <RadioGroup
+                inline
+                name="radioList"
+                appearance="picker"
+                defaultValue={year}
+                onChange={this.handleChange}
+                style={styles.radioGroup}
+              >
+                {years}
+              </RadioGroup>
+            </Row>
+            <Row className="show-grid">
+              <Col xs={24} sm={24} md={14}>
+                <h3>Salary per month - {year}</h3>
+
+                <canvas ref={this.salaryChartRef} />
+              </Col>
+              <Col xs={24} sm={24} md={10}>
+                <h3>Salary per year - {year}</h3>
+                <canvas
+                  ref={this.salaryYearChartRef}
+                  style={{ margin: "50px 0" }}
+                />
+              </Col>
+            </Row>
+          </Grid>
         </Panel>
-	     </Col>
-      <Col xs={24} sm={24} md={10}>
-	          <Panel
-          header={"Salary Per Year - " + this.state.year}
-          shaded
-          style={{ margin: "10px", borderRadius: "16px" }}
-        >
-          <canvas ref={this.salaryYearChartRef} />
-        </Panel>
-	     </Col>
-    </Row>
-	    </Grid>
       </div>
     );
   }
