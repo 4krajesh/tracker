@@ -7,6 +7,7 @@ import { Grid, Row, Col } from 'rsuite';
 
 import "./test.css"
 
+import SalaryChart from './salary';
 
 export default class Test extends React.Component {
 	constructor(props) {
@@ -25,8 +26,7 @@ export default class Test extends React.Component {
 	    </Row>
     <Row className="show-grid">
 	    <Col>
-	    <a onClick={this.editAction}> Edit </a>
-	    
+	   <SalaryChart/> 
 	    </Col>
     </Row>
 	    </Grid>

@@ -30,7 +30,7 @@ def generate_accounts():
     types = ['Credit', 'Savings', 'Current', 'E-Wallet']
     accounts = [{ "name": "All Accounts", "balance": "0", "id": "all", "type": 'All', "default": True },
                 { "name": "Wallet", "type": "Cash", "balance": random.randint(100,1000), "id": "wallet", "default": True}]
-    for i in range(0,random.randint(5,100)):
+    for i in range(0,random.randint(5,10)):
         account_names.append(random.choice(NAMES))
     account_names = set(account_names)
     print(account_names)

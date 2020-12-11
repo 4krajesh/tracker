@@ -1,8 +1,8 @@
 import React from "react";
 import BarChart from "./bar";
+import SalaryChart from "./salary";
 import { Grid, Row, Col } from "rsuite";
 
-import "../css/graphs.css";
 
 export default class Graphs extends React.Component {
   componentDidMount() {}
@@ -22,6 +22,9 @@ export default class Graphs extends React.Component {
               <BarChart />
             </Col>
           </Row>
+	    <Row className="show-grid">
+	    <SalaryChart /> 
+	    </Row>
         </Grid>
       </>
     );

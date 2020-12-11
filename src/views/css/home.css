@@ -21,7 +21,7 @@ body {
 	height: 150px;
 }
 
-.adder>.animate {
+.adder>.adiv>.animate {
   color: lightskyblue;
   background: transparent;
   animation: bounce 0.6s;
@@ -29,17 +29,22 @@ body {
   animation-iteration-count: infinite;
 }
 
+.adiv {
+	margin: auto;
+}
+
 .adder {
   background: transparent;
   border-radius: 0px;
   position: fixed;
   left: 0;
-  margin-left: -135px;
+  margin-left: -70px;
   top: 80px;
   transition: 1s, transform 1s;
   transition-delay: .5s;
-  height: 60px;
-  width: 200px;
+  height: 150px;
+  width: 120px;
+  display: flex;
 }
 
 .adder button {
@@ -67,12 +72,12 @@ body {
   padding: 0;
 }
 
-.adder:hover>.animate {
+.adder:hover>.adiv>.animate {
   color: transparent;
 }
 
 .adder:hover {
-  transform: translateX(150px);
+  transform: translateX(70px);
 }
 
 

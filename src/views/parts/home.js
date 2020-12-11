@@ -312,9 +312,13 @@ deleteAccount(id, index) {
           <Row className="show-grid">
             <Col>
 	    <div className="adder">
+	    <div>
 	    <NewAccount/>
 	    <NewTransaction/>
-	      <Button className="animate"> <FaAngleDoubleRight/> </Button>
+	    </div>
+	    <div className="adiv">
+	    <Button className="animate"> <FaAngleDoubleRight/> </Button>
+	    </div>
 	    </div>
               <div className="account-card-list">{accountItems}</div>
             </Col>

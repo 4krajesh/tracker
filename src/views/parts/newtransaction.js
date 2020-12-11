@@ -128,7 +128,7 @@ class NewTransaction extends Component {
     return (
       <>
         <Whisper
-          placement="top"
+          placement="right"
           trigger="hover"
           speaker={<Tooltip>New Transaction</Tooltip>}
         >
