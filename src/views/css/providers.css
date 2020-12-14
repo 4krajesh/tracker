@@ -1,0 +1,125 @@
+.rs-list-item {
+	text-align: center;
+}
+
+.icon {
+  background: transparent;
+  border-style: none;
+  width: 46px;
+  height: 46px;
+}
+
+.icon-plus {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 1s;
+}
+
+.icon-plus:before, .icon-plus:after {
+    background: #333;
+    transition: 1s;
+    border-radius: 50px;
+    position: absolute;
+    content: '';
+    width: 5px;
+    height: 20px;
+  }
+
+.icon-plus:after {
+    transform: rotate(90deg);
+}
+
+.provider-input {
+  position: absolute;
+  opacity: 0;
+  border-radius: 40px 40px;
+  height: 46px;
+  width: 5%;
+  border-style: none;
+  text-align: center;
+  transition: 1s;
+}
+
+.provider-delete, .provider-delete:hover, .provider-delete:focus {
+	background: transparent;
+	position: absolute;
+	right: 5px;
+	padding: 5px;
+	border-radius: 100%;
+	height: 26px;
+	width: 26px;
+}
+
+.provider-button {
+    position: absolute;
+	margin: '5px';
+	background: none;
+	padding: 0; 
+	height: 46px; 
+	min-width: 46px; 
+	font-size: large;
+}
+
+.provider-submit-button {
+        position: absolute;
+	opacity: 0;
+	transition: 1s;
+}
+
+.provider-submit-button:after, .provider-submit-button:before {
+	border-radius: 50px;
+    background: lightskyblue;
+    transition: 1s;
+    position: absolute;
+    content: "";
+    width: 5px;
+    height: 12px;
+}
+
+.provider-submit-button:after{
+	    top: 14px;
+    transform: rotate(-45deg);
+}
+
+.provider-submit-button:before{
+            top: 20px;
+    transform: rotate(45deg);
+}
+
+.provider-submit-button.active{
+  opacity: 1;
+    margin-left: 80%;
+}
+
+.icon-plus.active:after {
+    background: crimson;
+	transform: rotate(-45deg);
+}
+.icon-plus.active:before {
+    background: crimson;
+	transform: rotate(45deg);
+}
+
+.icon-plus.active {
+  margin-right: 80%;
+}
+
+.provider-input.active{
+  opacity: 1;
+  width: 100%;
+}
+
+.provider-footer > .rs-list-item-content {
+	height: 40px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.provider-input:focus, .provider-button:focus{
+	outline: none;
+}
+
+

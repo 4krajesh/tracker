@@ -7,7 +7,6 @@ import { Grid, Row, Col } from 'rsuite';
 
 import "./test.css"
 
-import SalaryChart from './salary';
 
 export default class Test extends React.Component {
 	constructor(props) {
