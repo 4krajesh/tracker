@@ -16,7 +16,7 @@ import { BsFillTerminalFill, BsWrench, BsFillHouseFill } from "react-icons/bs";
 import { FaChartPie } from "react-icons/fa";
 import { DOMHelper } from "rsuite";
 
-const { addClass, getOffsetParent } = DOMHelper;
+const { addClass } = DOMHelper;
 
 class Main extends Component {
   componentDidMount() {

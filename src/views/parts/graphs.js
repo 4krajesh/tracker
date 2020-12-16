@@ -1,6 +1,6 @@
 import React from "react";
 import SalaryChart from "./graphs/salary";
-import { Grid, Row, Col } from "rsuite";
+import { Grid, Row } from "rsuite";
 
 
 export default class Graphs extends React.Component {

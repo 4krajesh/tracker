@@ -128,7 +128,7 @@ export default class SalaryChart extends React.Component {
   }
   componentDidMount() {
     Chart.defaults.global.defaultFontFamily = "Quicksand";
-    fetch("http://192.168.0.104:3000/salary")
+    fetch("http://192.0.0.0:3000/salary")
       .then((res) => res.json())
       .then(
         (result) => {
@@ -151,6 +151,7 @@ export default class SalaryChart extends React.Component {
         (error) => {
           Notification.error({
             title: "Error",
+            duration: 0,
             description: (
               <>
                 <p>Unable to retrive salary data.</p>

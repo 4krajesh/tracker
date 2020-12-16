@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Grid, Row, Col, List, Button, Input, Notification, ButtonToolbar} from "rsuite";
+import {List, Button, Notification, ButtonToolbar} from "rsuite";
 
 import {  AiOutlineMinusCircle} from "react-icons/ai";
 
@@ -8,7 +8,7 @@ import { DOMHelper } from 'rsuite';
 
 import '../../css/providers.css';
 
-const { toggleClass, getOffsetParent } = DOMHelper;
+const { toggleClass } = DOMHelper;
 
 
 class Providers extends Component {
@@ -32,7 +32,7 @@ class Providers extends Component {
   }
 
 deleteProvider(name) {
-  const { accounts } = this.state;
+  const { data } = this.state;
   Notification.warning({
     title: 'Provider Delete - ' + name,
     duration: 10000,
@@ -44,7 +44,7 @@ deleteProvider(name) {
           <Button
             onClick={() => {
                     Notification.close();
-		    this.setState({data: this.state.data.filter(provider => provider !== name)}); }}
+		    this.setState({data: data.filter(provider => provider !== name)}); }}
           >
             Accept
           </Button>

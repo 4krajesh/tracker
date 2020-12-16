@@ -93,7 +93,7 @@ deleteAccount(id, index) {
   }
 
   stateUpdater(id) {
-    fetch("http://192.168.0.104:3001/accounts")
+    fetch("http://0.0.0.0:3001/accounts")
       .then((res) => res.json())
       .then(
         (result) => {
@@ -112,7 +112,9 @@ deleteAccount(id, index) {
         // exceptions from actual bugs in components.
         (error) => {
 		Notification.error({
+    duration: 0,
     title: 'Error',
+
     description:(
             <>
                 <p>Unable to retrive accounts data.</p>
