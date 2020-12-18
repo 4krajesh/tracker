@@ -103,7 +103,7 @@ class NewTransaction extends Component {
         type: formValue.accounttype,
       }),
     };
-    fetch("http://192.168.0.104:3001/createaccount", requestOptions)
+    fetch("http://0.0.0.0:3001/createaccount", requestOptions)
       .then((response) => response.json())
       .then(function (data) {
         open("error", data.msg);

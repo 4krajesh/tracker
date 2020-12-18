@@ -128,7 +128,7 @@ export default class SalaryChart extends React.Component {
   }
   componentDidMount() {
     Chart.defaults.global.defaultFontFamily = "Quicksand";
-    fetch("http://192.0.0.0:3000/salary")
+    fetch("http://0.0.0.0:3000/salary")
       .then((res) => res.json())
       .then(
         (result) => {
@@ -190,6 +190,9 @@ export default class SalaryChart extends React.Component {
       <div>
         <Panel shaded style={styles.panel}>
           <Grid fluid>
+            <Row className="show-grid" style={{display: 'flex', margin: '10px', justifyContent: 'center'}}>
+              <h2>Salary {year}</h2>
+            </Row>
             <Row className="show-grid">
               <RadioGroup
                 inline
@@ -204,12 +207,11 @@ export default class SalaryChart extends React.Component {
             </Row>
             <Row className="show-grid">
               <Col xs={24} sm={24} md={14}>
-                <h3>Salary per month - {year}</h3>
-
+                <h3 style={{display: 'flex', margin: '10px', justifyContent: 'center'}}>Monthwise</h3>
                 <canvas ref={this.salaryChartRef} />
               </Col>
               <Col xs={24} sm={24} md={10}>
-                <h3>Salary per year - {year}</h3>
+                <h3 style={{display: 'flex', margin: '10px', justifyContent: 'center'}}>Yearwise</h3>
                 <canvas
                   ref={this.salaryYearChartRef}
                   style={{ margin: "50px 0" }}

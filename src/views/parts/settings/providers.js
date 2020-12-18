@@ -86,7 +86,7 @@ deleteProvider(name) {
 	      <List.Item style={styles.providerHeader}>
 	    Providers
               </List.Item>
-	    <div style={{ overflowY: 'scroll', height: '230px' }}>
+	    <div style={{ overflowY: 'auto', height: '230px' }}>
 	    {items}
 	    </div>
               <List.Item className="provider-footer">

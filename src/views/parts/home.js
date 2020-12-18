@@ -17,7 +17,7 @@ import { DOMHelper } from 'rsuite';
 import { SwitchTransition, CSSTransition } from "react-transition-group";
 const { Column, HeaderCell, Cell, Pagination } = Table;
 
-const { removeClass, hasClass, toggleClass, getOffsetParent } = DOMHelper;
+const { removeClass, addStyle, hasClass, toggleClass, getOffsetParent } = DOMHelper;
 
 
 class Home extends Component {
@@ -58,11 +58,25 @@ deleteAccount(id, index) {
             <ButtonToolbar>
           <Button
             onClick={() => { 
-		    Notification.close();
+        Notification.close();
+        var i = index;
+        while(i < this.accountRefs.length){
+          toggleClass(getOffsetParent(this.accountRefs[i]), 'account-delete');
+          i++;
+        }
 		    if (hasClass(getOffsetParent(this.accountRefs[index]), 'active')) {
 			    this.accountDetails('all', 0);
+        }
+        i = index;
+        setTimeout(() => {
+          this.setState({accounts: accounts.filter(account => account.id !== id)}); 
+          while(i < this.accountRefs.length){
+            toggleClass(getOffsetParent(this.accountRefs[i]), 'account-delete');
+            i++;
+          }
+        }, 500);
+      }
 		    }
-		    this.setState({accounts: accounts.filter(account => account.id !== id)}); }}
           >
             Accept
           </Button>

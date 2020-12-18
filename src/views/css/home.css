@@ -122,13 +122,12 @@ body {
 }
 
 .fade-enter>.change-1 {
-  opacity: 0;
   transform: translate(0, 100%);
 }
 
 .fade-enter-active>.change {
   opacity: 1;
-  transform: translateX(0%);
+  transform: translateX(0);
 }
 
 .fade-exit>.change {
